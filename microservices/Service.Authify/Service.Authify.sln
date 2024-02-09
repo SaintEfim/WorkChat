@@ -1,8 +1,45 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{65951425-0CAE-4E86-A342-BFD65843598C}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Authify.API", "src\Service.Authify.API\Service.Authify.API.csproj", "{E3B9A2B4-AA85-4EC6-9309-165D49A85F73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Authify.Domain", "src\Service.Authify.Domain\Service.Authify.Domain.csproj", "{3F5BC7F9-0908-4FDE-B418-02C4C2FA18E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Authify.Domain.Abstractions", "src\Service.Authify.Domain.Abstractions\Service.Authify.Domain.Abstractions.csproj", "{DCB6960E-7DD6-4B92-9810-5F56E296DE0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Authify.Data.PostgreSql", "src\Service.Authify.Data.PostgreSql\Service.Authify.Data.PostgreSql.csproj", "{D930C41F-6BB3-4DBC-97D6-4C5C2682B9F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Authify.Data.Abstractions", "src\Service.Authify.Data.Abstractions\Service.Authify.Data.Abstractions.csproj", "{CEC73C1C-8D7E-4B17-873E-080845766321}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3B9A2B4-AA85-4EC6-9309-165D49A85F73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3B9A2B4-AA85-4EC6-9309-165D49A85F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3B9A2B4-AA85-4EC6-9309-165D49A85F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3B9A2B4-AA85-4EC6-9309-165D49A85F73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F5BC7F9-0908-4FDE-B418-02C4C2FA18E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F5BC7F9-0908-4FDE-B418-02C4C2FA18E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F5BC7F9-0908-4FDE-B418-02C4C2FA18E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F5BC7F9-0908-4FDE-B418-02C4C2FA18E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCB6960E-7DD6-4B92-9810-5F56E296DE0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCB6960E-7DD6-4B92-9810-5F56E296DE0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCB6960E-7DD6-4B92-9810-5F56E296DE0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCB6960E-7DD6-4B92-9810-5F56E296DE0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D930C41F-6BB3-4DBC-97D6-4C5C2682B9F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D930C41F-6BB3-4DBC-97D6-4C5C2682B9F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D930C41F-6BB3-4DBC-97D6-4C5C2682B9F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D930C41F-6BB3-4DBC-97D6-4C5C2682B9F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEC73C1C-8D7E-4B17-873E-080845766321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEC73C1C-8D7E-4B17-873E-080845766321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEC73C1C-8D7E-4B17-873E-080845766321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEC73C1C-8D7E-4B17-873E-080845766321}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
