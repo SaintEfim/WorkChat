@@ -1,0 +1,53 @@
+# Common IntelliJ Platform excludes
+
+# Exlcude All Idea files
+**/.idea/**
+
+# User specific
+**/.idea/**/workspace.xml
+**/.idea/**/tasks.xml
+**/.idea/shelf/*
+**/.idea/dictionaries
+**/.idea/httpRequests/
+
+# Sensitive or high-churn files
+**/.idea/**/dataSources/
+**/.idea/**/dataSources.ids
+**/.idea/**/dataSources.xml
+**/.idea/**/dataSources.local.xml
+**/.idea/**/sqlDataSources.xml
+**/.idea/**/dynamic.xml
+
+# Rider
+# Rider auto-generates .iml files, and contentModel.xml
+**/.idea/**/*.iml
+**/.idea/**/contentModel.xml
+**/.idea/**/modules.xml
+
+*.suo
+*.user
+.vs/
+[Bb]in/
+[Oo]bj/
+artifacts/
+_UpgradeReport_Files/
+[Pp]ackages/
+/_ReSharper.Caches/
+/*.DotSettings
+
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# VS Code files
+/.vscode/launch.json
+/.vscode/tasks.json
+
+# Local user settings files
+appsettings.user.json
+appsettings.*.user.json
+
+# Generated documentation files
+
+# Ignore logs
+*.log
