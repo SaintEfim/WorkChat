@@ -1,4 +1,4 @@
-﻿namespace Service.Authify.Domain.Abstractions.Models;
+﻿namespace Service.Authify.Domain.Models;
 
 public class UserCredential
 {
