@@ -4,11 +4,10 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>Service.Authify.Data</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Service.Authify.Domain.Abstractions\Service.Authify.Domain.Abstractions.csproj" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.3.1" />
     </ItemGroup>
 
 </Project>
