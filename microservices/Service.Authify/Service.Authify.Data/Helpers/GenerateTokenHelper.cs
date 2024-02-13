@@ -9,18 +9,20 @@ public class GenerateTokenHelper
 {
     private readonly GenerateClaimsHelper _generateClaimsHelper;
     private readonly GenerateKeyHelper _generateKeyHelper;
+
     GenerateTokenHelper(GenerateClaimsHelper generateClaimsHelper, GenerateKeyHelper generateKeyHelper)
     {
         _generateClaimsHelper = generateClaimsHelper;
         _generateKeyHelper = generateKeyHelper;
     }
+
     public string GenerateToken(string userId, string? role, string secretKey, TimeSpan expiresIn)
     {
         if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(secretKey))
         {
             throw new ArgumentException("userId and secretKey must not be null or empty.");
         }
-        
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = _generateKeyHelper.GenerateKey(secretKey);
 
@@ -30,7 +32,8 @@ public class GenerateTokenHelper
         {
             Subject = new ClaimsIdentity(claims),
             Expires = DateTime.UtcNow.Add(expiresIn),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            SigningCredentials =
+                new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
 
         var token = tokenHandler.CreateToken(tokenDescriptor);

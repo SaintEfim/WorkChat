@@ -14,18 +14,23 @@ public class UserCredentialRepository : IUserCredentialRepository
 {
     private readonly ApplicationDbContext _context;
     private readonly IMapper _mapper;
+    private readonly GenerateTokenHelper _generateToken;
+    private readonly string _accessHours;
+    private readonly string _refreshHours;
     private readonly string _accessSecretKey;
     private readonly string _refreshSecretKey;
-    private readonly GenerateTokenHelper _generateToken;
-
+    
     public UserCredentialRepository(ApplicationDbContext context, IMapper mapper, IConfiguration configuration,
         GenerateTokenHelper generateToken)
     {
         _context = context;
         _mapper = mapper;
         _generateToken = generateToken;
+        _accessHours = configuration.GetValue<string>("HoursSettings:AccessHours")!;
+        _refreshHours = configuration.GetValue<string>("HoursSettings:RefreshHours")!;
         _accessSecretKey = configuration.GetValue<string>("ApiSettings:AccessSecret")!;
         _refreshSecretKey = configuration.GetValue<string>("ApiSettings:RefreshSecret")!;
+        
     }
 
     public async Task Register(RegistrationRequest registrationRequest, CancellationToken cancellationToken = default)
@@ -56,9 +61,9 @@ public class UserCredentialRepository : IUserCredentialRepository
         }
 
         var accessToken =
-            _generateToken.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey, TimeSpan.FromHours(1));
+            _generateToken.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey, TimeSpan.Parse(_accessHours));
         var refreshToken =
-            _generateToken.GenerateToken(user.Id.ToString(), null, _refreshSecretKey, TimeSpan.FromDays(1));
+            _generateToken.GenerateToken(user.Id.ToString(), null, _refreshSecretKey, TimeSpan.Parse(_refreshSecretKey));
 
         return new LoginResponse
         {

@@ -13,12 +13,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="">
+    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="Added exception check to Registration">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Service.Authify.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Service.Authify.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data.Abstractions/Service.Authify.Data.Abstractions.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data.Abstractions/Service.Authify.Data.Abstractions.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Service.Authify.Data.PostgreSql.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Service.Authify.Data.PostgreSql.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +23,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/Service.Authify.Data/Helpers/GenerateTokenHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo"><![CDATA[{
@@ -176,8 +180,33 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707473536649</updated>
-      <workItem from="1707473537671" duration="27721000" />
+      <workItem from="1707473537671" duration="31148000" />
     </task>
+    <task id="LOCAL-00001" summary="Moved key generation to a separate class">
+      <option name="closed" value="true" />
+      <created>1707826135221</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1707826135221</updated>
+    </task>
+    <task id="LOCAL-00002" summary="INSERT changed SELECT">
+      <option name="closed" value="true" />
+      <created>1707826490614</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1707826490614</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added exception check to Registration">
+      <option name="closed" value="true" />
+      <created>1707826920234</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1707826920234</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,5 +215,9 @@
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Moved key generation to a separate class" />
+    <MESSAGE value="INSERT changed SELECT" />
+    <MESSAGE value="Added exception check to Registration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added exception check to Registration" />
   </component>
 </project>
