@@ -15,7 +15,6 @@
   <component name="ChangeListManager">
     <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Service.Authify.Domain.Abstractions.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Service.Authify.Domain.Abstractions.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +172,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707473536649</updated>
-      <workItem from="1707473537671" duration="7903000" />
+      <workItem from="1707473537671" duration="14857000" />
     </task>
     <servers />
   </component>
