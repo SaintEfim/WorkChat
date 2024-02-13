@@ -66,7 +66,7 @@ public class UserCredentialRepository : IUserCredentialRepository
 
     public async Task<ICollection<UserCredential>> Get(CancellationToken cancellationToken = default)
     {
-        return await _context.UsersCredentials.FromSqlRaw("INSERT * FROM UserCredentials")
+        return await _context.UsersCredentials.FromSqlRaw("SELECT * FROM UserCredentials")
             .ToListAsync(cancellationToken);
     }
 
