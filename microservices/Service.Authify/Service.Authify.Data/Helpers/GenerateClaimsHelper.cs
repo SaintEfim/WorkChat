@@ -2,7 +2,7 @@
 
 namespace Service.Authify.Data.Helpers;
 
-public class GenerateClaimsHelper
+internal class GenerateClaimsHelper
 {
     public List<Claim> GenerateClaims(string userId, string? role)
     {

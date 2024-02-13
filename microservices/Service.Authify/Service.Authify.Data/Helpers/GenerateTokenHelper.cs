@@ -8,9 +8,11 @@ namespace Service.Authify.Data.Helpers;
 public class GenerateTokenHelper
 {
     private readonly GenerateClaimsHelper _generateClaimsHelper;
-    GenerateTokenHelper(GenerateClaimsHelper generateClaimsHelper)
+    private readonly GenerateKeyHelper _generateKeyHelper;
+    GenerateTokenHelper(GenerateClaimsHelper generateClaimsHelper, GenerateKeyHelper generateKeyHelper)
     {
         _generateClaimsHelper = generateClaimsHelper;
+        _generateKeyHelper = generateKeyHelper;
     }
     public string GenerateToken(string userId, string? role, string secretKey, TimeSpan expiresIn)
     {
@@ -20,7 +22,7 @@ public class GenerateTokenHelper
         }
         
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(secretKey);
+        var key = _generateKeyHelper.GenerateKey(secretKey);
 
         var claims = _generateClaimsHelper.GenerateClaims(userId, role);
 
