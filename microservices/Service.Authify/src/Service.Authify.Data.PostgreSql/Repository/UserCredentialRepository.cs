@@ -40,9 +40,6 @@ public class UserCredentialRepository : IUserCredentialRepository
 
     public async Task<LoginResponse> Login(LoginRequest loginRequest, CancellationToken cancellationToken = default)
     {
-        // var user = _context.UsersCredentials.FirstOrDefault(u =>
-        //     u.Email == loginRequest.Email && u.Password == loginRequest.Password);
-
         var user = await _context.UsersCredentials
             .FromSqlRaw("SELECT Email, Password FROM UserCredentials WHERE Email = {0} AND Password = {1}",
                 loginRequest.Email, loginRequest.Password)

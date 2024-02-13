@@ -7,20 +7,22 @@ namespace Service.Authify.Data.Helpers;
 
 public class GenerateTokenHelper
 {
+    private readonly GenerateClaimsHelper _generateClaimsHelper;
+    GenerateTokenHelper(GenerateClaimsHelper generateClaimsHelper)
+    {
+        _generateClaimsHelper = generateClaimsHelper;
+    }
     public string GenerateToken(string userId, string? role, string secretKey, TimeSpan expiresIn)
     {
+        if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(secretKey))
+        {
+            throw new ArgumentException("userId and secretKey must not be null or empty.");
+        }
+        
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(secretKey);
 
-        var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, userId)
-        };
-
-        if (!string.IsNullOrEmpty(role))
-        {
-            claims.Add(new Claim(ClaimTypes.Role, role));
-        }
+        var claims = _generateClaimsHelper.GenerateClaims(userId, role);
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
