@@ -56,9 +56,9 @@ public class UserCredentialRepository : IUserCredentialRepository
                 loginRequest.Email, loginRequest.Password)
             .FirstOrDefaultAsync(cancellationToken);
 
-        if (user == default(UserCredential))
+        if (user == null)
         {
-            return null!;
+            throw new InvalidOperationException("Invalid email or password.");
         }
 
         var accessToken =
