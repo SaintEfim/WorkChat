@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Authify.Data.Postgr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Authify.Data.Abstractions", "src\Service.Authify.Data.Abstractions\Service.Authify.Data.Abstractions.csproj", "{CEC73C1C-8D7E-4B17-873E-080845766321}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Authify.Data", "Service.Authify.Data\Service.Authify.Data.csproj", "{347D8C82-4C5A-42AC-8A03-1FFE6191B7E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Authify.Data", "src\Service.Authify.Data\Service.Authify.Data.csproj", "{347D8C82-4C5A-42AC-8A03-1FFE6191B7E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

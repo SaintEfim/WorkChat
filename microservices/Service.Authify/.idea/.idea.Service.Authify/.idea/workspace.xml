@@ -13,9 +13,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="Added exception check to Registration">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="Added exception check to Registration" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -186,6 +184,7 @@
       <workItem from="1707473537671" duration="31148000" />
       <workItem from="1707901330531" duration="98000" />
       <workItem from="1707901459452" duration="901000" />
+      <workItem from="1707998689586" duration="28000" />
     </task>
     <task id="LOCAL-00001" summary="Moved key generation to a separate class">
       <option name="closed" value="true" />
