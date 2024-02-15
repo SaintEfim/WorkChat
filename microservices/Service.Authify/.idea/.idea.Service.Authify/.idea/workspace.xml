@@ -25,43 +25,46 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/Service.Authify.Data/Helpers/GenerateTokenHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data/Helpers/GenerateTokenHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="Toolset" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2c7rcP41MpOoOYjwiPGmPM1TzYn" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature/working__on__the__date__layer",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/working__on__the__date__layer&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\user\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\user\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\user\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\user\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\user\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\user\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Service.Authify.API: http">
     <configuration name="Service.Authify.API" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -181,6 +184,8 @@
       <option name="presentableId" value="Default" />
       <updated>1707473536649</updated>
       <workItem from="1707473537671" duration="31148000" />
+      <workItem from="1707901330531" duration="98000" />
+      <workItem from="1707901459452" duration="901000" />
     </task>
     <task id="LOCAL-00001" summary="Moved key generation to a separate class">
       <option name="closed" value="true" />
