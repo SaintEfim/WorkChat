@@ -84,7 +84,7 @@ public class UserCredentialRepository : IUserCredentialRepository
 
     public bool IsUniqueUser(string email)
     {
-        var userExists  = _context.UsersCredentials
+        var userExists = _context.UsersCredentials
             .FromSqlRaw("SELECT Email FROM UserCredentials WHERE Email = {0}", email)
             .FirstOrDefault();
 

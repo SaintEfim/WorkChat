@@ -26,7 +26,17 @@ public class GenerateTokenHelper
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = _generateKeyHelper.GenerateKey(secretKey);
 
+        if (key == null)
+        {
+            throw new Exception("The generated key is null.");
+        }
+
         var claims = _generateClaimsHelper.GenerateClaims(userId, role);
+
+        if (claims == null)
+        {
+            throw new Exception("The generated key is null.");
+        }
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
