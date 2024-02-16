@@ -53,8 +53,8 @@ public class UserCredentialRepository : IUserCredentialRepository
     public async Task<LoginResponse> Login(LoginRequest loginRequest, CancellationToken cancellationToken = default)
     {
         var user = await _context.UsersCredentials
-            .FromSqlRaw("SELECT Email, Password FROM UserCredentials WHERE Email = {0} AND Password = {1}",
-                loginRequest.Email, loginRequest.Password)
+            .FromSqlRaw("SELECT Email, Password FROM {0} WHERE Email = {1} AND Password = {2}",
+                nameof(UserCredential), loginRequest.Email, loginRequest.Password)
             .FirstOrDefaultAsync(cancellationToken);
 
         if (user == null)
@@ -86,7 +86,7 @@ public class UserCredentialRepository : IUserCredentialRepository
     public bool IsUniqueUser(string email)
     {
         var userExists = _context.UsersCredentials
-            .FromSqlRaw("SELECT Email FROM UserCredentials WHERE Email = {0}", email)
+            .FromSqlRaw("SELECT Email FROM {0} WHERE Email = {1}", nameof(UserCredential), email)
             .FirstOrDefault();
 
         return userExists == null;
