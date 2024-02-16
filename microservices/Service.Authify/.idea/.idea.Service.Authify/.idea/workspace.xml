@@ -13,9 +13,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Service.Authify.Data.PostgreSql.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Service.Authify.Data.PostgreSql.csproj" afterDir="false" />
+    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="Error handling in GenerateTokenHelper">
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/Properties/launchSettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,12 +30,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data/Helpers/GenerateTokenHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -52,9 +46,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    ".NET Launch Settings Profile.Service.Authify.API: Service.Authify.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "bugfix/edited__Service.Authify.Data.PostgreSql.csproj",
+    "git-widget-placeholder": "feature/working__on__the__API__layer",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -71,7 +66,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Service.Authify.API: http">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Service.Authify.API">
     <configuration name="Service.Authify.API" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -86,6 +81,21 @@
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="DotNetCore" />
       <option name="PROJECT_TFM" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="Service.Authify.API" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/src/Service.Authify.API/Service.Authify.API.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net8.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="Service.Authify.API" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
       <method v="2">
         <option name="Build" />
       </method>
@@ -105,10 +115,10 @@
         <option name="Build" />
       </method>
     </configuration>
-    <configuration name="Service.Authify.API: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
-      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Service.Authify.API/Service.Authify.API.csproj" />
+    <configuration name="Service.Authify.API: Service.Authify" type="LaunchSettings" factoryName=".NET Launch Settings Profile" temporary="true">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/src/Service.Authify.API/Service.Authify.API.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net8.0" />
-      <option name="LAUNCH_PROFILE_NAME" value="http" />
+      <option name="LAUNCH_PROFILE_NAME" value="Service.Authify" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
@@ -120,10 +130,10 @@
         <option name="Build" />
       </method>
     </configuration>
-    <configuration name="Service.Authify.API: https" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+    <configuration name="Service.Authify.API: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Service.Authify.API/Service.Authify.API.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net8.0" />
-      <option name="LAUNCH_PROFILE_NAME" value="https" />
+      <option name="LAUNCH_PROFILE_NAME" value="http" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
@@ -180,6 +190,21 @@
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Launch Settings Profile.Service.Authify.API: http" />
+      <item itemvalue=".NET Launch Settings Profile.Service.Authify.API" />
+      <item itemvalue=".NET Launch Settings Profile.Service.Authify.API: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.Service.Authify.Domain: http" />
+      <item itemvalue=".NET Launch Settings Profile.Service.Authify.Domain: https" />
+      <item itemvalue=".NET Launch Settings Profile.Service.Authify.Domain: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.Service.Authify.API: Service.Authify" />
+      <item itemvalue=".NET Project.Service.Authify.API" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue=".NET Launch Settings Profile.Service.Authify.API: Service.Authify" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -220,7 +245,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707826920234</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Error handling in GenerateTokenHelper">
+      <option name="closed" value="true" />
+      <created>1708084328529</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1708084328529</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,6 +265,7 @@
     <MESSAGE value="Moved key generation to a separate class" />
     <MESSAGE value="INSERT changed SELECT" />
     <MESSAGE value="Added exception check to Registration" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added exception check to Registration" />
+    <MESSAGE value="Error handling in GenerateTokenHelper" />
+    <option name="LAST_COMMIT_MESSAGE" value="Error handling in GenerateTokenHelper" />
   </component>
 </project>
