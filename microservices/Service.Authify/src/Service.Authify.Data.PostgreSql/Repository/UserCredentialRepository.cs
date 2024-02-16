@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Service.Authify.Data.Exceptions;
 using Service.Authify.Data.PostgreSql.Context;
 using Service.Authify.Data.Helpers;
 using Service.Authify.Data.Repository;
@@ -15,6 +16,7 @@ public class UserCredentialRepository : IUserCredentialRepository
     private readonly ApplicationDbContext _context;
     private readonly IMapper _mapper;
     private readonly GenerateTokenHelper _generateToken;
+    private readonly string _tokenType;
     private readonly string _accessHours;
     private readonly string _refreshHours;
     private readonly string _accessSecretKey;
@@ -26,6 +28,7 @@ public class UserCredentialRepository : IUserCredentialRepository
         _context = context;
         _mapper = mapper;
         _generateToken = generateToken;
+        _tokenType = config.GetValue<string>("TokenType")!;
         _accessHours = config.GetValue<string>("HoursSettings:AccessHours")!;
         _refreshHours = config.GetValue<string>("HoursSettings:RefreshHours")!;
         _accessSecretKey = config.GetValue<string>("ApiSettings:AccessSecret")!;
@@ -36,7 +39,7 @@ public class UserCredentialRepository : IUserCredentialRepository
     {
         if (IsUniqueUser(registrationRequest.Email))
         {
-            throw new InvalidOperationException("A user with the same email address already exists.");
+            throw new DuplicateUserException($"{registrationRequest.Email}");
         }
 
         var user = _mapper.Map<UserCredential>(registrationRequest);
@@ -70,7 +73,7 @@ public class UserCredentialRepository : IUserCredentialRepository
 
         return new LoginResponse
         {
-            TokenType = "Bearer",
+            TokenType = _tokenType,
             AccessToken = accessToken,
             ExpiresIn = (int)TimeSpan.FromHours(1).TotalSeconds,
             RefreshToken = refreshToken
@@ -79,7 +82,7 @@ public class UserCredentialRepository : IUserCredentialRepository
 
     public async Task<ICollection<UserCredential>> Get(CancellationToken cancellationToken = default)
     {
-        return await _context.UsersCredentials.FromSqlRaw("SELECT * FROM UserCredentials")
+        return await _context.UsersCredentials.FromSqlRaw("SELECT * FROM {0}", nameof(UserCredential))
             .ToListAsync(cancellationToken);
     }
 
