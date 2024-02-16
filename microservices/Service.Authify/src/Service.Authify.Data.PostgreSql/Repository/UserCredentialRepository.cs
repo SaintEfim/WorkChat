@@ -20,16 +20,16 @@ public class UserCredentialRepository : IUserCredentialRepository
     private readonly string _accessSecretKey;
     private readonly string _refreshSecretKey;
 
-    public UserCredentialRepository(ApplicationDbContext context, IMapper mapper, IConfiguration configuration,
+    public UserCredentialRepository(ApplicationDbContext context, IMapper mapper, IConfiguration config,
         GenerateTokenHelper generateToken)
     {
         _context = context;
         _mapper = mapper;
         _generateToken = generateToken;
-        _accessHours = configuration.GetValue<string>("HoursSettings:AccessHours")!;
-        _refreshHours = configuration.GetValue<string>("HoursSettings:RefreshHours")!;
-        _accessSecretKey = configuration.GetValue<string>("ApiSettings:AccessSecret")!;
-        _refreshSecretKey = configuration.GetValue<string>("ApiSettings:RefreshSecret")!;
+        _accessHours = config.GetValue<string>("HoursSettings:AccessHours")!;
+        _refreshHours = config.GetValue<string>("HoursSettings:RefreshHours")!;
+        _accessSecretKey = config.GetValue<string>("ApiSettings:AccessSecret")!;
+        _refreshSecretKey = config.GetValue<string>("ApiSettings:RefreshSecret")!;
     }
 
     public async Task Register(RegistrationRequest registrationRequest, CancellationToken cancellationToken = default)
