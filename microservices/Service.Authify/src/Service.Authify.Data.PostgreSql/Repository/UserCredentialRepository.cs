@@ -43,8 +43,9 @@ public class UserCredentialRepository : IUserCredentialRepository
         user.CreatedAt = DateTime.UtcNow;
 
         await _context.UsersCredentials.FromSqlRaw(
-                "INSERT INTO UserCredentials (Id, Email, Password, Role, CreatedAt)" +
-                "VALUES ({0}, {1}, {2}, {3}, {4})", user.Id, user.Email, user.Password, user.Role, user.CreatedAt)
+                "INSERT INTO {0} (Id, Email, Password, Role, CreatedAt)" +
+                "VALUES ({1}, {2}, {3}, {4}, {5})", nameof(UserCredential), user.Id, user.Email, user.Password,
+                user.Role, user.CreatedAt)
             .ToListAsync(cancellationToken: cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
     }
