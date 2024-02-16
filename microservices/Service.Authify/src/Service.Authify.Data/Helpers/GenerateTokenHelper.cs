@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Service.Authify.Data.Exceptions;
 
 namespace Service.Authify.Data.Helpers;
 
@@ -20,7 +21,7 @@ public class GenerateTokenHelper
     {
         if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(secretKey))
         {
-            throw new ArgumentException("userId and secretKey must not be null or empty.");
+            throw new InvalidOperationException($"{userId} or {secretKey} must not be null or empty.");
         }
 
         var tokenHandler = new JwtSecurityTokenHandler();
@@ -28,14 +29,14 @@ public class GenerateTokenHelper
 
         if (key == null)
         {
-            throw new Exception("The generated key is null.");
+            throw new KeyGenerationException("The generated key is null.");
         }
 
         var claims = _generateClaimsHelper.GenerateClaims(userId, role);
 
         if (claims == null)
         {
-            throw new Exception("The generated key is null.");
+            throw new ClaimsGenerationException("The generated key is null.");
         }
 
         var tokenDescriptor = new SecurityTokenDescriptor
