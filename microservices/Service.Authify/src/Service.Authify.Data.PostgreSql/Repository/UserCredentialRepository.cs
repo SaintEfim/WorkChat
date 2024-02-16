@@ -39,7 +39,8 @@ public class UserCredentialRepository : IUserCredentialRepository
     {
         if (IsUniqueUser(registrationRequest.Email))
         {
-            throw new DuplicateUserException($"{registrationRequest.Email}");
+            throw new DuplicateUserException(
+                $"A user with the same {registrationRequest.Email} address already exists.");
         }
 
         var user = _mapper.Map<UserCredential>(registrationRequest);
