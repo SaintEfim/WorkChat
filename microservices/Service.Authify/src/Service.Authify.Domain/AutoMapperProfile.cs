@@ -2,7 +2,7 @@
 using Service.Authify.Domain.Models;
 using Service.Authify.Domain.Models.Requests;
 
-namespace Service.Authify.Data.PostgreSql;
+namespace Service.Authify.Domain;
 
 public sealed class AutoMapperProfile : Profile
 {
