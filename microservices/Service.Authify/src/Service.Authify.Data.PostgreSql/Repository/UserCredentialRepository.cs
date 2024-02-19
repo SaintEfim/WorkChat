@@ -37,12 +37,6 @@ public class UserCredentialRepository : IUserCredentialRepository
 
     public async Task Register(RegistrationRequest registrationRequest, CancellationToken cancellationToken = default)
     {
-        if (IsUniqueUser(registrationRequest.Email))
-        {
-            throw new DuplicateUserException(
-                $"A user with the same {registrationRequest.Email} address already exists.");
-        }
-
         var user = _mapper.Map<UserCredential>(registrationRequest);
         user.CreatedAt = DateTime.UtcNow;
 

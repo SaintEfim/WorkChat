@@ -1,4 +1,5 @@
 ﻿using Service.Authify.Data.Repository;
+using Service.Authify.Domain.Exceptions;
 using Service.Authify.Domain.Models.Requests;
 using Service.Authify.Domain.Models.Responses;
 
@@ -15,6 +16,12 @@ public class UserCredentialManager : IUserCredentialManager
 
     public async Task Register(RegistrationRequest registrationRequest, CancellationToken cancellationToken = default)
     {
+        if (_repository.IsUniqueUser(registrationRequest.Email))
+        {
+            throw new DuplicateUserException(
+                $"A user with the same {registrationRequest.Email} address already exists.");
+        }
+        
         await _repository.Register(registrationRequest, cancellationToken);
     }
 
