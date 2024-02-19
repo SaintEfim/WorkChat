@@ -27,6 +27,9 @@ public class UserCredentialManager : IUserCredentialManager
 
     public async Task<LoginResponse> Login(LoginRequest loginRequest, CancellationToken cancellationToken = default)
     {
-        return await _repository.Login(loginRequest, cancellationToken);
+        var user = await _repository.GetUserByEmailAndPasswordAsync(loginRequest, cancellationToken);
+        return await _repository.Login(user, cancellationToken);
     }
+    
+    
 }

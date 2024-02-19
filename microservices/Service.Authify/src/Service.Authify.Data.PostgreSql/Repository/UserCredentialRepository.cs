@@ -48,18 +48,8 @@ public class UserCredentialRepository : IUserCredentialRepository
         await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<LoginResponse> Login(LoginRequest loginRequest, CancellationToken cancellationToken = default)
+    public async Task<LoginResponse> Login(UserCredential user, CancellationToken cancellationToken = default)
     {
-        var user = await _context.UsersCredentials
-            .FromSqlRaw("SELECT Email, Password FROM {0} WHERE Email = {1} AND Password = {2}",
-                nameof(UserCredential), loginRequest.Email, loginRequest.Password)
-            .FirstOrDefaultAsync(cancellationToken);
-
-        if (user == null)
-        {
-            throw new InvalidOperationException("Invalid email or password.");
-        }
-
         var accessToken =
             _generateToken.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey, TimeSpan.Parse(_accessHours));
         var refreshToken =
@@ -88,5 +78,15 @@ public class UserCredentialRepository : IUserCredentialRepository
             .FirstOrDefault();
 
         return userExists == null;
+    }
+
+    public async Task<UserCredential> GetUserByEmailAndPasswordAsync(LoginRequest loginRequest, CancellationToken cancellationToken = default)
+    {
+        var user = await _context.UsersCredentials
+            .FromSqlRaw("SELECT Email, Password FROM {0} WHERE Email = {1} AND Password = {2}",
+                nameof(UserCredential), loginRequest.Email, loginRequest.Password)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        return user;
     }
 }

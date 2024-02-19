@@ -11,11 +11,14 @@ public interface IUserCredentialRepository
         CancellationToken cancellationToken = default);
 
     Task<LoginResponse> Login(
-        LoginRequest loginRequest,
+        UserCredential user,
         CancellationToken cancellationToken = default);
 
     Task<ICollection<UserCredential>> Get(
         CancellationToken cancellationToken = default);
 
     bool IsUniqueUser(string username);
+
+    Task<UserCredential> GetUserByEmailAndPasswordAsync(LoginRequest loginRequest,
+        CancellationToken cancellationToken = default);
 }

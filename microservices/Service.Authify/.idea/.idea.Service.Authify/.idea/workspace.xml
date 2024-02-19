@@ -4,7 +4,7 @@
     <projectFile profileName="IIS Express">Service.Authify.API/Service.Authify.API.csproj</projectFile>
     <projectFile profileName="http">Service.Authify.API/Service.Authify.API.csproj</projectFile>
     <projectFile profileName="https">Service.Authify.API/Service.Authify.API.csproj</projectFile>
-    <projectFile>src/Service.Authify.API/Service.Authify.API.csproj</projectFile>
+    <projectFile profileName="https">src/Service.Authify.API/Service.Authify.API.csproj</projectFile>
     <projectFile profileName="IIS Express">src/Service.Authify.Domain/Service.Authify.Domain.csproj</projectFile>
     <projectFile profileName="http">src/Service.Authify.Domain/Service.Authify.Domain.csproj</projectFile>
     <projectFile profileName="https">src/Service.Authify.Domain/Service.Authify.Domain.csproj</projectFile>
@@ -14,8 +14,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Service.Authify.Data.PostgreSql.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Service.Authify.Data.PostgreSql.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data.Abstractions/Repository/IUserCredentialRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data.Abstractions/Repository/IUserCredentialRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/UserCredentialManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/UserCredentialManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +55,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "bugfix/edited__Service.Authify.Data.PostgreSql.csproj",
+    "git-widget-placeholder": "feature/transferring__checks__from__the__repository__to__the__manager__and__provider",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -180,6 +181,15 @@
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Launch Settings Profile.Service.Authify.API: https" />
+      <item itemvalue=".NET Launch Settings Profile.Service.Authify.API: http" />
+      <item itemvalue=".NET Launch Settings Profile.Service.Authify.API: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.Service.Authify.Domain: http" />
+      <item itemvalue=".NET Launch Settings Profile.Service.Authify.Domain: https" />
+      <item itemvalue=".NET Launch Settings Profile.Service.Authify.Domain: IIS Express" />
+      <item itemvalue=".NET Project.Service.Authify.API" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
