@@ -7,7 +7,7 @@ namespace Service.Authify.Data.Repository;
 public interface IUserCredentialRepository
 {
     Task Register(
-        RegistrationRequest registrationRequest,
+        UserCredential user,
         CancellationToken cancellationToken = default);
 
     Task<LoginResponse> Login(

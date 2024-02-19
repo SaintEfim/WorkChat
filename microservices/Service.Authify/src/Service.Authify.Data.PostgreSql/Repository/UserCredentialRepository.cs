@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Service.Authify.Data.Exceptions;
 using Service.Authify.Data.PostgreSql.Context;
 using Service.Authify.Data.Helpers;
 using Service.Authify.Data.Repository;
@@ -14,7 +13,6 @@ namespace Service.Authify.Data.PostgreSql.Repository;
 public class UserCredentialRepository : IUserCredentialRepository
 {
     private readonly ApplicationDbContext _context;
-    private readonly IMapper _mapper;
     private readonly GenerateTokenHelper _generateToken;
     private readonly string _tokenType;
     private readonly string _accessHours;
@@ -26,7 +24,6 @@ public class UserCredentialRepository : IUserCredentialRepository
         GenerateTokenHelper generateToken)
     {
         _context = context;
-        _mapper = mapper;
         _generateToken = generateToken;
         _tokenType = config.GetValue<string>("TokenType")!;
         _accessHours = config.GetValue<string>("HoursSettings:AccessHours")!;
@@ -35,15 +32,12 @@ public class UserCredentialRepository : IUserCredentialRepository
         _refreshSecretKey = config.GetValue<string>("ApiSettings:RefreshSecret")!;
     }
 
-    public async Task Register(RegistrationRequest registrationRequest, CancellationToken cancellationToken = default)
+    public async Task Register(UserCredential user, CancellationToken cancellationToken = default)
     {
-        var user = _mapper.Map<UserCredential>(registrationRequest);
-        user.CreatedAt = DateTime.UtcNow;
-
         await _context.UsersCredentials.FromSqlRaw(
                 "INSERT INTO {0} (Id, Email, Password, Role, CreatedAt)" +
                 "VALUES ({1}, {2}, {3}, {4}, {5})", nameof(UserCredential), user.Id, user.Email, user.Password,
-                user.Role, user.CreatedAt)
+                user.Role, DateTime.UtcNow)
             .ToListAsync(cancellationToken: cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
     }
@@ -80,12 +74,13 @@ public class UserCredentialRepository : IUserCredentialRepository
         return userExists == null;
     }
 
-    public async Task<UserCredential> GetUserByEmailAndPasswordAsync(LoginRequest loginRequest, CancellationToken cancellationToken = default)
+    public async Task<UserCredential> GetUserByEmailAndPasswordAsync(LoginRequest loginRequest,
+        CancellationToken cancellationToken = default)
     {
         var user = await _context.UsersCredentials
             .FromSqlRaw("SELECT Email, Password FROM {0} WHERE Email = {1} AND Password = {2}",
                 nameof(UserCredential), loginRequest.Email, loginRequest.Password)
-            .FirstOrDefaultAsync(cancellationToken);
+            .SingleOrDefaultAsync(cancellationToken);
 
         return user;
     }
