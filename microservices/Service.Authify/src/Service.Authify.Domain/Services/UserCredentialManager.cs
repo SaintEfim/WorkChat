@@ -47,7 +47,7 @@ public class UserCredentialManager : IUserCredentialManager
         var loginResponse = await _repository.Login(user, cancellationToken);
         if (loginResponse == null)
         {
-            throw new InvalidOperationException("Login response is null.");
+            throw new DataNotFoundException("Login response is null.");
         }
 
         return loginResponse;
