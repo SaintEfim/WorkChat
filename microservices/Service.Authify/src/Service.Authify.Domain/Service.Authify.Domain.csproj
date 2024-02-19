@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Service.Authify.Data.Abstractions\Service.Authify.Data.Abstractions.csproj" />
+      <ProjectReference Include="..\Service.Authify.Domain.Abstractions\Service.Authify.Domain.Abstractions.csproj" />
+    </ItemGroup>
+
 </Project>

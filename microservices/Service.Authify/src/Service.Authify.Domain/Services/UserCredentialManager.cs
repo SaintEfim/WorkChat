@@ -1,0 +1,25 @@
+﻿using Service.Authify.Data.Repository;
+using Service.Authify.Domain.Models.Requests;
+using Service.Authify.Domain.Models.Responses;
+
+namespace Service.Authify.Domain.Services;
+
+public class UserCredentialManager : IUserCredentialManager
+{
+    private readonly IUserCredentialRepository _repository;
+
+    public UserCredentialManager(IUserCredentialRepository repository)
+    {
+        _repository = repository;
+    }
+
+    public async Task Register(RegistrationRequest registrationRequest, CancellationToken cancellationToken = default)
+    {
+        await _repository.Register(registrationRequest, cancellationToken);
+    }
+
+    public async Task<LoginResponse> Login(LoginRequest loginRequest, CancellationToken cancellationToken = default)
+    {
+        return await _repository.Login(loginRequest, cancellationToken);
+    }
+}
