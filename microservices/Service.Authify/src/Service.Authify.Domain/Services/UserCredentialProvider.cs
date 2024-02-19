@@ -21,7 +21,7 @@ public class UserCredentialProvider : IUserCredentialProvider
         {
             throw new DataNotFoundException("No users found.");
         }
-        
+
         return users;
     }
 }
