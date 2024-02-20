@@ -20,7 +20,7 @@ public class UserCredentialManager : IUserCredentialManager
 
     public async Task Register(RegistrationRequest registrationRequest, CancellationToken cancellationToken = default)
     {
-        if (_repository.IsUniqueUser(registrationRequest.Email))
+        if (await _repository.IsUniqueUser(registrationRequest.Email, cancellationToken))
         {
             throw new DuplicateUserException(
                 $"A user with the same {registrationRequest.Email} address already exists.");

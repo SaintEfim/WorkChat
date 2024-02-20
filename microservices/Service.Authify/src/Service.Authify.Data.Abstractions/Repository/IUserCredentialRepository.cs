@@ -17,7 +17,7 @@ public interface IUserCredentialRepository
     Task<ICollection<UserCredential>> Get(
         CancellationToken cancellationToken = default);
 
-    bool IsUniqueUser(string username);
+    Task<bool> IsUniqueUser(string email, CancellationToken cancellationToken = default);
 
     Task<UserCredential> GetUserByEmailAndPasswordAsync(LoginRequest loginRequest,
         CancellationToken cancellationToken = default);

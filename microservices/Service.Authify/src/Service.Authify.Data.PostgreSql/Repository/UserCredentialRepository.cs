@@ -65,11 +65,11 @@ public class UserCredentialRepository : IUserCredentialRepository
             .ToListAsync(cancellationToken);
     }
 
-    public bool IsUniqueUser(string email)
+    public async Task<bool> IsUniqueUser(string email, CancellationToken cancellationToken = default)
     {
-        var userExists = _context.UsersCredentials
-            .FromSqlRaw("SELECT Email FROM {0} WHERE Email = {1}", nameof(UserCredential), email)
-            .FirstOrDefault();
+        var userExists = await _context.UsersCredentials
+            .FromSqlInterpolated($"SELECT Email FROM {nameof(UserCredential)} WHERE Email = {email}")
+            .SingleOrDefaultAsync();
 
         return userExists == null;
     }
@@ -82,6 +82,6 @@ public class UserCredentialRepository : IUserCredentialRepository
                 nameof(UserCredential), loginRequest.Email, loginRequest.Password)
             .SingleOrDefaultAsync(cancellationToken);
 
-        return user;
+        return user!;
     }
 }
