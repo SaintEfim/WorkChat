@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Service.Authify.Data.Exceptions;
 using Service.Authify.Data.PostgreSql.Context;
 using Service.Authify.Data.Helpers;
 using Service.Authify.Data.Repository;
@@ -14,7 +13,6 @@ namespace Service.Authify.Data.PostgreSql.Repository;
 public class UserCredentialRepository : IUserCredentialRepository
 {
     private readonly ApplicationDbContext _context;
-    private readonly IMapper _mapper;
     private readonly GenerateTokenHelper _generateToken;
     private readonly string _tokenType;
     private readonly string _accessHours;
@@ -26,7 +24,6 @@ public class UserCredentialRepository : IUserCredentialRepository
         GenerateTokenHelper generateToken)
     {
         _context = context;
-        _mapper = mapper;
         _generateToken = generateToken;
         _tokenType = config.GetValue<string>("TokenType")!;
         _accessHours = config.GetValue<string>("HoursSettings:AccessHours")!;
@@ -35,37 +32,18 @@ public class UserCredentialRepository : IUserCredentialRepository
         _refreshSecretKey = config.GetValue<string>("ApiSettings:RefreshSecret")!;
     }
 
-    public async Task Register(RegistrationRequest registrationRequest, CancellationToken cancellationToken = default)
+    public async Task Register(UserCredential user, CancellationToken cancellationToken = default)
     {
-        if (IsUniqueUser(registrationRequest.Email))
-        {
-            throw new DuplicateUserException(
-                $"A user with the same {registrationRequest.Email} address already exists.");
-        }
-
-        var user = _mapper.Map<UserCredential>(registrationRequest);
-        user.CreatedAt = DateTime.UtcNow;
-
         await _context.UsersCredentials.FromSqlRaw(
                 "INSERT INTO {0} (Id, Email, Password, Role, CreatedAt)" +
                 "VALUES ({1}, {2}, {3}, {4}, {5})", nameof(UserCredential), user.Id, user.Email, user.Password,
-                user.Role, user.CreatedAt)
+                user.Role, DateTime.UtcNow)
             .ToListAsync(cancellationToken: cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<LoginResponse> Login(LoginRequest loginRequest, CancellationToken cancellationToken = default)
+    public async Task<LoginResponse> Login(UserCredential user, CancellationToken cancellationToken = default)
     {
-        var user = await _context.UsersCredentials
-            .FromSqlRaw("SELECT Email, Password FROM {0} WHERE Email = {1} AND Password = {2}",
-                nameof(UserCredential), loginRequest.Email, loginRequest.Password)
-            .FirstOrDefaultAsync(cancellationToken);
-
-        if (user == null)
-        {
-            throw new InvalidOperationException("Invalid email or password.");
-        }
-
         var accessToken =
             _generateToken.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey, TimeSpan.Parse(_accessHours));
         var refreshToken =
@@ -87,12 +65,23 @@ public class UserCredentialRepository : IUserCredentialRepository
             .ToListAsync(cancellationToken);
     }
 
-    public bool IsUniqueUser(string email)
+    public async Task<bool> IsUniqueUser(string email, CancellationToken cancellationToken = default)
     {
-        var userExists = _context.UsersCredentials
-            .FromSqlRaw("SELECT Email FROM {0} WHERE Email = {1}", nameof(UserCredential), email)
-            .FirstOrDefault();
+        var userExists = await _context.UsersCredentials
+            .FromSqlInterpolated($"SELECT Email FROM {nameof(UserCredential)} WHERE Email = {email}")
+            .SingleOrDefaultAsync();
 
         return userExists == null;
+    }
+
+    public async Task<UserCredential> GetUserByEmailAndPasswordAsync(LoginRequest loginRequest,
+        CancellationToken cancellationToken = default)
+    {
+        var user = await _context.UsersCredentials
+            .FromSqlRaw("SELECT Email, Password FROM {0} WHERE Email = {1} AND Password = {2}",
+                nameof(UserCredential), loginRequest.Email, loginRequest.Password)
+            .SingleOrDefaultAsync(cancellationToken);
+
+        return user!;
     }
 }

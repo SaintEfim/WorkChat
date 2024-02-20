@@ -7,15 +7,18 @@ namespace Service.Authify.Data.Repository;
 public interface IUserCredentialRepository
 {
     Task Register(
-        RegistrationRequest registrationRequest,
+        UserCredential user,
         CancellationToken cancellationToken = default);
 
     Task<LoginResponse> Login(
-        LoginRequest loginRequest,
+        UserCredential user,
         CancellationToken cancellationToken = default);
 
     Task<ICollection<UserCredential>> Get(
         CancellationToken cancellationToken = default);
 
-    bool IsUniqueUser(string username);
+    Task<bool> IsUniqueUser(string email, CancellationToken cancellationToken = default);
+
+    Task<UserCredential> GetUserByEmailAndPasswordAsync(LoginRequest loginRequest,
+        CancellationToken cancellationToken = default);
 }
