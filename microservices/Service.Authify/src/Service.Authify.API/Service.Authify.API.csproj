@@ -21,6 +21,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Service.Authify.Data.PostgreSql\Service.Authify.Data.PostgreSql.csproj" />
       <ProjectReference Include="..\Service.Authify.Domain.Abstractions\Service.Authify.Domain.Abstractions.csproj" />
+      <ProjectReference Include="..\Service.Authify.Domain\Service.Authify.Domain.csproj" />
     </ItemGroup>
 
 </Project>

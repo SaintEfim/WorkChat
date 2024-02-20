@@ -18,7 +18,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/Service.Authify.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/Service.Authify.API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/GenerateKeyHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/GenerateKeyHelper.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +56,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    ".NET Launch Settings Profile.Service.Authify.API.executor": "Run",
     ".NET Project.Service.Authify.API.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",

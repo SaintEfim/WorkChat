@@ -1,15 +1,16 @@
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Service.Authify.Data.Helpers;
 using Service.Authify.Data.PostgreSql.Context;
+using Service.Authify.Data.PostgreSql.Repository;
+using Service.Authify.Data.Repository;
+using Service.Authify.Domain.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-
-// var mapperConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
-// IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -17,6 +18,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.EnableDetailedErrors(true);
     options.EnableSensitiveDataLogging(true);
 });
+
+builder.Services.AddScoped<GenerateClaimsHelper>(); 
+builder.Services.AddScoped<GenerateKeyHelper>(); 
+builder.Services.AddScoped<GenerateTokenHelper>();
+builder.Services.AddScoped<IUserCredentialRepository, UserCredentialRepository>();
+builder.Services.AddScoped<IUserCredentialManager, UserCredentialManager>();
+
 
 var app = builder.Build();
 
