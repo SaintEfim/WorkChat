@@ -8,12 +8,15 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="13.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controller\" />
+      <ProjectReference Include="..\Service.Authify.Data.PostgreSql\Service.Authify.Data.PostgreSql.csproj" />
+      <ProjectReference Include="..\Service.Authify.Domain.Abstractions\Service.Authify.Domain.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>
