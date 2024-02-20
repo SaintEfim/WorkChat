@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Service.Authify.API.Models;
-using Service.Authify.Domain.Models;
 using Service.Authify.Domain.Services;
 
 namespace Service.Authify.API.Controller;
