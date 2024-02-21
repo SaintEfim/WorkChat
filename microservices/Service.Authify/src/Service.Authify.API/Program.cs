@@ -26,8 +26,6 @@ builder.Services.AddScoped<IUserCredentialRepository, UserCredentialRepository>(
 builder.Services.AddScoped<IUserCredentialManager, UserCredentialManager>();
 builder.Services.AddScoped<IUserCredentialProvider, UserCredentialProvider>();
 
-
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
