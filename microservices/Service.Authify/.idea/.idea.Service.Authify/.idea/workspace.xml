@@ -16,8 +16,7 @@
   <component name="ChangeListManager">
     <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/UserCredentialProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/UserCredentialProvider.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
