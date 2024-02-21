@@ -15,8 +15,8 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("PSQL"), action => { action.CommandTimeout(30); });
-    options.EnableDetailedErrors(true);
-    options.EnableSensitiveDataLogging(true);
+    options.EnableDetailedErrors();
+    options.EnableSensitiveDataLogging();
 });
 
 builder.Services.AddScoped<GenerateClaimsHelper>(); 
