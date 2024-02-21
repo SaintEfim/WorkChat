@@ -17,9 +17,7 @@
     <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/Service.Authify.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/Service.Authify.API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/GenerateKeyHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/GenerateKeyHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,5 +172,24 @@
     <MESSAGE value="INSERT changed SELECT" />
     <MESSAGE value="Added exception check to Registration" />
     <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/Service.Authify.API/Controller/UserCredentialController.cs</url>
+          <line>25</line>
+          <properties documentPath="C:\NovGu\WorkChat\microservices\Service.Authify\src\Service.Authify.API\Controller\UserCredentialController.cs" initialLine="25" containingFunctionPresentation="Method 'Get'">
+            <startOffsets>
+              <option value="772" />
+            </startOffsets>
+            <endOffsets>
+              <option value="806" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

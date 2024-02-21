@@ -35,8 +35,8 @@ public class UserCredentialRepository : IUserCredentialRepository
     public async Task Register(UserCredential user, CancellationToken cancellationToken = default)
     {
         await _context.UsersCredentials.FromSqlRaw(
-                "INSERT INTO {0} (Id, Email, Password, Role, CreatedAt)" +
-                "VALUES ({1}, {2}, {3}, {4}, {5})", nameof(UserCredential), user.Id, user.Email, user.Password,
+                "INSERT INTO public.\"UsersCredentials\" (Id, Email, Password, Role, CreatedAt)" +
+                "VALUES ({1}, {2}, {3}, {4}, {5})", user.Id, user.Email, user.Password,
                 user.Role, DateTime.UtcNow)
             .ToListAsync(cancellationToken: cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
@@ -61,14 +61,14 @@ public class UserCredentialRepository : IUserCredentialRepository
 
     public async Task<ICollection<UserCredential>> Get(CancellationToken cancellationToken = default)
     {
-        return await _context.UsersCredentials.FromSqlRaw("SELECT * FROM {0}", nameof(UserCredential))
+        return await _context.UsersCredentials.FromSqlRaw("SELECT * FROM public.\"UsersCredentials\"")
             .ToListAsync(cancellationToken);
     }
 
     public async Task<bool> IsUniqueUser(string email, CancellationToken cancellationToken = default)
     {
         var userExists = await _context.UsersCredentials
-            .FromSqlInterpolated($"SELECT Email FROM {nameof(UserCredential)} WHERE Email = {email}")
+            .FromSqlInterpolated($"SELECT Email FROM public.\"UsersCredentials\" WHERE Email = {email}")
             .SingleOrDefaultAsync();
 
         return userExists == null;
@@ -78,8 +78,8 @@ public class UserCredentialRepository : IUserCredentialRepository
         CancellationToken cancellationToken = default)
     {
         var user = await _context.UsersCredentials
-            .FromSqlRaw("SELECT Email, Password FROM {0} WHERE Email = {1} AND Password = {2}",
-                nameof(UserCredential), loginRequest.Email, loginRequest.Password)
+            .FromSqlRaw("SELECT Email, Password FROM public.\"UsersCredentials\" WHERE Email = {1} AND Password = {2}",
+                loginRequest.Email, loginRequest.Password)
             .SingleOrDefaultAsync(cancellationToken);
 
         return user!;
