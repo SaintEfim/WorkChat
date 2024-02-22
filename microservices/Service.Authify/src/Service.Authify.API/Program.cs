@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Service.Authify.API;
 using Service.Authify.Data.Helpers;
 using Service.Authify.Data.PostgreSql.Context;
 using Service.Authify.Data.PostgreSql.Repository;
@@ -11,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddDependencyInjection();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -18,13 +20,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.EnableDetailedErrors();
     options.EnableSensitiveDataLogging();
 });
-
-builder.Services.AddScoped<GenerateClaimsHelper>(); 
-builder.Services.AddScoped<GenerateKeyHelper>(); 
-builder.Services.AddScoped<GenerateTokenHelper>();
-builder.Services.AddScoped<IUserCredentialRepository, UserCredentialRepository>();
-builder.Services.AddScoped<IUserCredentialManager, UserCredentialManager>();
-builder.Services.AddScoped<IUserCredentialProvider, UserCredentialProvider>();
 
 var app = builder.Build();
 
