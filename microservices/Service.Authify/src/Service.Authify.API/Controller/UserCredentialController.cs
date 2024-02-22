@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Service.Authify.API.Models;
 using Service.Authify.Domain.Services;
+using Swashbuckle.AspNetCore.Annotations;
+using static Microsoft.AspNetCore.Http.StatusCodes;
 
 namespace Service.Authify.API.Controller;
 
@@ -21,7 +23,9 @@ public class UserCredentialController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<UserCredentialDto>>> Get(CancellationToken cancellationToken = default)
+    [SwaggerOperation(OperationId = nameof(UserCredentialGet))]
+    [SwaggerResponse(Status200OK, Type = typeof(List<UserCredentialDto>))]
+    public async Task<ActionResult<List<UserCredentialDto>>> UserCredentialGet(CancellationToken cancellationToken = default)
     {
         var users = await _provider.Get();
         return Ok(_mapper.Map<List<UserCredentialDto>>(users));
