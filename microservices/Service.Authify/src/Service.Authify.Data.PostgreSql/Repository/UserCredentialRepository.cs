@@ -39,7 +39,7 @@ namespace Service.Authify.Data.PostgreSql.Repository
             await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<LoginResponse> Login(UserCredential user, CancellationToken cancellationToken = default)
+        public Task<LoginResponse> Login(UserCredential user, CancellationToken cancellationToken = default)
         {
             var accessToken =
                 _generateToken.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey,
@@ -48,13 +48,13 @@ namespace Service.Authify.Data.PostgreSql.Repository
                 _generateToken.GenerateToken(user.Id.ToString(), null, _refreshSecretKey,
                     TimeSpan.Parse(_refreshHours));
 
-            return new LoginResponse
+            return Task.FromResult(new LoginResponse
             {
                 TokenType = _tokenType,
                 AccessToken = accessToken,
                 ExpiresIn = (int)TimeSpan.FromHours(1).TotalSeconds,
                 RefreshToken = refreshToken
-            };
+            });
         }
 
         public async Task<ICollection<UserCredential>> Get(CancellationToken cancellationToken = default)
