@@ -7,11 +7,6 @@ using Service.Authify.Data.Repository;
 using Service.Authify.Domain.Models;
 using Service.Authify.Domain.Models.Requests;
 using Service.Authify.Domain.Models.Responses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Service.Authify.Data.PostgreSql.Repository
 {
