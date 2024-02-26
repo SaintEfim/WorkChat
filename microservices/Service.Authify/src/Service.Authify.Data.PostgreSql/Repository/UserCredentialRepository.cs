@@ -47,7 +47,8 @@ namespace Service.Authify.Data.PostgreSql.Repository
         public async Task<LoginResponse> Login(UserCredential user, CancellationToken cancellationToken = default)
         {
             var accessToken =
-                _generateToken.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey, TimeSpan.Parse(_accessHours));
+                _generateToken.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey,
+                    TimeSpan.Parse(_accessHours));
             var refreshToken =
                 _generateToken.GenerateToken(user.Id.ToString(), null, _refreshSecretKey,
                     TimeSpan.Parse(_refreshHours));
