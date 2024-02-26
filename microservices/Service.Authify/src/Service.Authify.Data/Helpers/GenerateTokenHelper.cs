@@ -11,7 +11,7 @@ public class GenerateTokenHelper
     private readonly GenerateClaimsHelper _generateClaimsHelper;
     private readonly GenerateKeyHelper _generateKeyHelper;
 
-    GenerateTokenHelper(GenerateClaimsHelper generateClaimsHelper, GenerateKeyHelper generateKeyHelper)
+    public GenerateTokenHelper(GenerateClaimsHelper generateClaimsHelper, GenerateKeyHelper generateKeyHelper)
     {
         _generateClaimsHelper = generateClaimsHelper;
         _generateKeyHelper = generateKeyHelper;

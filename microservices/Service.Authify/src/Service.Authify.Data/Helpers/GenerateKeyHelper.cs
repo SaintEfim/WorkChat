@@ -2,7 +2,7 @@
 
 namespace Service.Authify.Data.Helpers;
 
-internal class GenerateKeyHelper
+public class GenerateKeyHelper
 {
     public byte[] GenerateKey(string secretKey)
     {

@@ -1,0 +1,16 @@
+﻿using AutoMapper;
+using Service.Authify.API.Models;
+using Service.Authify.API.Models.RequestsDto;
+using Service.Authify.Domain.Models;
+using Service.Authify.Domain.Models.Requests;
+
+namespace Service.Authify.API;
+
+public sealed class AutoMapperProfile : Profile
+{
+    public AutoMapperProfile()
+    {
+        CreateMap<UserCredential, UserCredentialDto>();
+        CreateMap<RegistrationRequestDto, RegistrationRequest>();
+    }
+}
