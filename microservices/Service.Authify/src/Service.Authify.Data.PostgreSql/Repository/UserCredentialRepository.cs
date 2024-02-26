@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Service.Authify.Data.PostgreSql.Context;
 using Service.Authify.Data.Helpers;
@@ -20,7 +19,7 @@ namespace Service.Authify.Data.PostgreSql.Repository
         private readonly string _accessSecretKey;
         private readonly string _refreshSecretKey;
 
-        public UserCredentialRepository(ApplicationDbContext context, IMapper mapper, IConfiguration config,
+        public UserCredentialRepository(ApplicationDbContext context, IConfiguration config,
             GenerateTokenHelper generateToken)
         {
             _context = context;
