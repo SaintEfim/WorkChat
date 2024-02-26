@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Service.Authify.API.Models;
+using Service.Authify.API.Models.RequestsDto;
+using Service.Authify.Domain.Models.Requests;
 using Service.Authify.Domain.Services;
 using Swashbuckle.AspNetCore.Annotations;
 using static Microsoft.AspNetCore.Http.StatusCodes;
@@ -25,9 +27,21 @@ public class UserCredentialController : ControllerBase
     [HttpGet]
     [SwaggerOperation(OperationId = nameof(UserCredentialGet))]
     [SwaggerResponse(Status200OK, Type = typeof(List<UserCredentialDto>))]
-    public async Task<ActionResult<List<UserCredentialDto>>> UserCredentialGet(CancellationToken cancellationToken = default)
+    public async Task<ActionResult<List<UserCredentialDto>>> UserCredentialGet(
+        CancellationToken cancellationToken = default)
     {
         var users = await _provider.Get();
         return Ok(_mapper.Map<List<UserCredentialDto>>(users));
+    }
+
+    [HttpPost]
+    [SwaggerOperation(OperationId = nameof(UserCredentialGet))]
+    [SwaggerResponse(Status200OK)]
+    public async Task<IActionResult> UserCredentialRegister(RegistrationRequestDto registrationRequest,
+        CancellationToken cancellationToken = default)
+    {
+        var res = _mapper.Map<RegistrationRequest>(registrationRequest);
+        await _manager.Register(res);
+        return Ok();
     }
 }

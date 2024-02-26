@@ -1,17 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using Service.Authify.API;
-using Service.Authify.Data.Helpers;
+using Service.Authify.API.Helpers;
 using Service.Authify.Data.PostgreSql.Context;
-using Service.Authify.Data.PostgreSql.Repository;
-using Service.Authify.Data.Repository;
-using Service.Authify.Domain.Services;
+using Service.Authify.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapperFromAllAssemblies();
 builder.Services.AddControllers();
-builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddDependencyInjection();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

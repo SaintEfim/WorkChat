@@ -7,81 +7,82 @@ using Service.Authify.Data.Repository;
 using Service.Authify.Domain.Models;
 using Service.Authify.Domain.Models.Requests;
 using Service.Authify.Domain.Models.Responses;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace Service.Authify.Data.PostgreSql.Repository;
-
-public class UserCredentialRepository : IUserCredentialRepository
+namespace Service.Authify.Data.PostgreSql.Repository
 {
-    private readonly ApplicationDbContext _context;
-    private readonly GenerateTokenHelper _generateToken;
-    private readonly string _tokenType;
-    private readonly string _accessHours;
-    private readonly string _refreshHours;
-    private readonly string _accessSecretKey;
-    private readonly string _refreshSecretKey;
-
-    public UserCredentialRepository(ApplicationDbContext context, IMapper mapper, IConfiguration config,
-        GenerateTokenHelper generateToken)
+    public class UserCredentialRepository : IUserCredentialRepository
     {
-        _context = context;
-        _generateToken = generateToken;
-        _tokenType = config.GetValue<string>("TokenType")!;
-        _accessHours = config.GetValue<string>("HoursSettings:AccessHours")!;
-        _refreshHours = config.GetValue<string>("HoursSettings:RefreshHours")!;
-        _accessSecretKey = config.GetValue<string>("ApiSettings:AccessSecret")!;
-        _refreshSecretKey = config.GetValue<string>("ApiSettings:RefreshSecret")!;
-    }
+        private readonly ApplicationDbContext _context;
+        private readonly GenerateTokenHelper _generateToken;
+        private readonly string _tokenType;
+        private readonly string _accessHours;
+        private readonly string _refreshHours;
+        private readonly string _accessSecretKey;
+        private readonly string _refreshSecretKey;
 
-    public async Task Register(UserCredential user, CancellationToken cancellationToken = default)
-    {
-        await _context.UsersCredentials.FromSqlRaw(
-                "INSERT INTO public.\"UsersCredentials\" (Id, Email, Password, Role, CreatedAt)" +
-                "VALUES ({1}, {2}, {3}, {4}, {5})", user.Id, user.Email, user.Password,
-                user.Role, DateTime.UtcNow)
-            .ToListAsync(cancellationToken: cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
-    }
-
-    public Task<LoginResponse> Login(UserCredential user, CancellationToken cancellationToken = default)
-    {
-        var accessToken =
-            _generateToken.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey, TimeSpan.Parse(_accessHours));
-        var refreshToken =
-            _generateToken.GenerateToken(user.Id.ToString(), null, _refreshSecretKey,
-                TimeSpan.Parse(_refreshHours));
-
-        return Task.FromResult(new LoginResponse
+        public UserCredentialRepository(ApplicationDbContext context, IMapper mapper, IConfiguration config,
+            GenerateTokenHelper generateToken)
         {
-            TokenType = _tokenType,
-            AccessToken = accessToken,
-            ExpiresIn = (int)TimeSpan.FromHours(1).TotalSeconds,
-            RefreshToken = refreshToken
-        });
-    }
+            _context = context;
+            _generateToken = generateToken;
+            _tokenType = config.GetValue<string>("TokenType")!;
+            _accessHours = config.GetValue<string>("HoursSettings:AccessHours")!;
+            _refreshHours = config.GetValue<string>("HoursSettings:RefreshHours")!;
+            _accessSecretKey = config.GetValue<string>("ApiSettings:AccessSecret")!;
+            _refreshSecretKey = config.GetValue<string>("ApiSettings:RefreshSecret")!;
+        }
 
-    public async Task<ICollection<UserCredential>> Get(CancellationToken cancellationToken = default)
-    {
-        return await _context.UsersCredentials.FromSqlRaw("SELECT * FROM public.\"UsersCredentials\"")
-            .ToListAsync(cancellationToken);
-    }
+        public async Task Register(UserCredential user, CancellationToken cancellationToken = default)
+        {
+            user.CreatedAt = DateTime.UtcNow;
+            await _context.UsersCredentials.AddAsync(user, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
 
-    public async Task<bool> IsUniqueUser(string email, CancellationToken cancellationToken = default)
-    {
-        var userExists = await _context.UsersCredentials
-            .FromSqlInterpolated($"SELECT Email FROM public.\"UsersCredentials\" WHERE Email = {email}")
-            .SingleOrDefaultAsync();
+        public async Task<LoginResponse> Login(UserCredential user, CancellationToken cancellationToken = default)
+        {
+            var accessToken =
+                _generateToken.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey, TimeSpan.Parse(_accessHours));
+            var refreshToken =
+                _generateToken.GenerateToken(user.Id.ToString(), null, _refreshSecretKey,
+                    TimeSpan.Parse(_refreshHours));
 
-        return userExists == null;
-    }
+            return new LoginResponse
+            {
+                TokenType = _tokenType,
+                AccessToken = accessToken,
+                ExpiresIn = (int)TimeSpan.FromHours(1).TotalSeconds,
+                RefreshToken = refreshToken
+            };
+        }
 
-    public async Task<UserCredential> GetUserByEmailAndPasswordAsync(LoginRequest loginRequest,
-        CancellationToken cancellationToken = default)
-    {
-        var user = await _context.UsersCredentials
-            .FromSqlRaw("SELECT Email, Password FROM public.\"UsersCredentials\" WHERE Email = {1} AND Password = {2}",
-                loginRequest.Email, loginRequest.Password)
-            .SingleOrDefaultAsync(cancellationToken);
+        public async Task<ICollection<UserCredential>> Get(CancellationToken cancellationToken = default)
+        {
+            return await _context.UsersCredentials.ToListAsync(cancellationToken);
+        }
 
-        return user!;
+        public async Task<bool> IsUniqueUser(string email, CancellationToken cancellationToken = default)
+        {
+            var userExists = await _context.UsersCredentials
+                .Where(u => u.Email == email)
+                .SingleOrDefaultAsync(cancellationToken);
+
+            return userExists != null;
+        }
+
+        public async Task<UserCredential?> GetUserByEmailAndPasswordAsync(LoginRequest loginRequest,
+            CancellationToken cancellationToken = default)
+        {
+            var userExists = await _context.UsersCredentials
+                .Where(u => u.Email == loginRequest.Email)
+                .SingleOrDefaultAsync(cancellationToken);
+
+            return userExists;
+        }
     }
 }
