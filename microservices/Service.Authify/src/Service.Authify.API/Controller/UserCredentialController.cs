@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Service.Authify.API.Models;
 using Service.Authify.API.Models.RequestsDto;
+using Service.Authify.API.Models.ResponsesDto;
 using Service.Authify.Domain.Models.Requests;
+using Service.Authify.Domain.Models.Responses;
 using Service.Authify.Domain.Services;
 using Swashbuckle.AspNetCore.Annotations;
 using static Microsoft.AspNetCore.Http.StatusCodes;
@@ -34,13 +36,23 @@ public class UserCredentialController : ControllerBase
         return Ok(_mapper.Map<List<UserCredentialDto>>(users));
     }
 
-    [HttpPost]
-    [SwaggerOperation(OperationId = nameof(UserCredentialGet))]
+    [HttpPost("register")]
+    [SwaggerOperation(OperationId = nameof(UserCredentialRegister))]
     [SwaggerResponse(Status200OK)]
     public async Task<IActionResult> UserCredentialRegister(RegistrationRequestDto registrationRequest,
         CancellationToken cancellationToken = default)
     {
         await _manager.Register(_mapper.Map<RegistrationRequest>(registrationRequest));
         return Ok();
+    }
+
+    [HttpPost("login")]
+    [SwaggerOperation(OperationId = nameof(UserCredentialLogin))]
+    [SwaggerResponse(Status200OK)]
+    public async Task<ActionResult<LoginResponseDto>> UserCredentialLogin(LoginRequestDto loginRequest,
+        CancellationToken cancellationToken = default)
+    {
+        var res = await _manager.Login(_mapper.Map<LoginRequest>(loginRequest));
+        return Ok(_mapper.Map<LoginResponseDto>(res));
     }
 }
