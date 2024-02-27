@@ -4,7 +4,6 @@ using Service.Authify.API.Models;
 using Service.Authify.API.Models.RequestsDto;
 using Service.Authify.API.Models.ResponsesDto;
 using Service.Authify.Domain.Models.Requests;
-using Service.Authify.Domain.Models.Responses;
 using Service.Authify.Domain.Services;
 using Swashbuckle.AspNetCore.Annotations;
 using static Microsoft.AspNetCore.Http.StatusCodes;
