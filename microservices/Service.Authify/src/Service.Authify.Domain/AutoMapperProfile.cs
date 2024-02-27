@@ -8,6 +8,8 @@ public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<RegistrationRequest, UserCredential>();
+        CreateMap<RegistrationRequest, UserCredential>()
+            .ForMember(dest => dest.Role,
+                opt => { opt.MapFrom(src => string.IsNullOrEmpty(src.Role) ? "user" : src.Role); });
     }
 }

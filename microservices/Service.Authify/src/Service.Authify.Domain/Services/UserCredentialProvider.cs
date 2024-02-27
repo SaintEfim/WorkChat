@@ -17,11 +17,11 @@ public class UserCredentialProvider : IUserCredentialProvider
     {
         var users = await _repository.Get();
 
-        if ((users != null) && (!users.Any()))
+        if (users != null && !users.Any())
         {
             throw new DataNotFoundException("No users found.");
         }
 
-        return users;
+        return users!;
     }
 }

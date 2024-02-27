@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Service.Authify.API;
 using Service.Authify.API.Helpers;
 using Service.Authify.Data.PostgreSql.Context;
-using Service.Authify.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
