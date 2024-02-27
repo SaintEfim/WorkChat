@@ -40,8 +40,7 @@ public class UserCredentialController : ControllerBase
     public async Task<IActionResult> UserCredentialRegister(RegistrationRequestDto registrationRequest,
         CancellationToken cancellationToken = default)
     {
-        var res = _mapper.Map<RegistrationRequest>(registrationRequest);
-        await _manager.Register(res);
+        await _manager.Register(_mapper.Map<RegistrationRequest>(registrationRequest));
         return Ok();
     }
 }
