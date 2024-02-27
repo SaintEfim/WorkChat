@@ -4,7 +4,9 @@
     <projectFile profileName="IIS Express">Service.Authify.API/Service.Authify.API.csproj</projectFile>
     <projectFile profileName="http">Service.Authify.API/Service.Authify.API.csproj</projectFile>
     <projectFile profileName="https">Service.Authify.API/Service.Authify.API.csproj</projectFile>
+    <projectFile profileName="IIS Express">src/Service.Authify.API/Service.Authify.API.csproj</projectFile>
     <projectFile profileName="Service.Authify.API">src/Service.Authify.API/Service.Authify.API.csproj</projectFile>
+    <projectFile profileName="http">src/Service.Authify.API/Service.Authify.API.csproj</projectFile>
     <projectFile profileName="https">src/Service.Authify.API/Service.Authify.API.csproj</projectFile>
     <projectFile profileName="IIS Express">src/Service.Authify.Domain/Service.Authify.Domain.csproj</projectFile>
     <projectFile profileName="http">src/Service.Authify.Domain/Service.Authify.Domain.csproj</projectFile>
@@ -14,10 +16,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/UserCredentialProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/UserCredentialProvider.cs" afterDir="false" />
-    </list>
+    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="bugfix" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,12 +31,18 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.API/AutoMapperProfile.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.API/Controller/UserCredentialController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.API/DependencyInjectionContainer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.API/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.Abstractions/Repository/IUserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data/Helpers/GenerateTokenHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1fce37416598a5fb677f9b329d52e2e9d64e126621a5229f5a5884d87827b9ad/Mapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/394cf11a64687141fd58fb926ff8b3d5a299eba3bbadaf2de9b93928d523d4/Type.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a614a754ab15364aa8ac82b190515fa48f911fb8282094b3f4f4144d126882/MapperConfigurationExpression.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d882146b4f265f10bcbec2663fce248db9ffec5fa1aeaf76e32a11ba5eafcd6/MethodBaseInvoker.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -58,7 +63,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "deletionFromPopupRequiresConfirmation": "false",
-    "git-widget-placeholder": "feature/working__on__the__API__layer",
+    "git-widget-placeholder": "bugfix/remove__unusing__librarys",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -158,7 +163,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707826920234</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="bugfix">
+      <option name="closed" value="true" />
+      <created>1708961372734</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1708961372734</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,7 +183,8 @@
     <MESSAGE value="Moved key generation to a separate class" />
     <MESSAGE value="INSERT changed SELECT" />
     <MESSAGE value="Added exception check to Registration" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="bugfix" />
+    <option name="LAST_COMMIT_MESSAGE" value="bugfix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

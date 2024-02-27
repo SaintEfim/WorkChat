@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Service.Authify.Domain.Abstractions\Service.Authify.Domain.Abstractions.csproj" />
+        <ProjectReference Include="..\Service.Authify.Domain.Abstractions\Service.Authify.Domain.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>
