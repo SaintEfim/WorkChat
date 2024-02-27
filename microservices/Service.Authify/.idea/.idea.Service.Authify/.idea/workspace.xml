@@ -16,8 +16,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="reformat code">
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Context/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Context/ApplicationDbContext.cs" afterDir="false" />
+    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="remove fields">
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain/AutoMapperProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain/AutoMapperProfile.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +43,7 @@
     <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data/Helpers/GenerateTokenHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Domain.Abstractions/Models/UserCredential.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1fce37416598a5fb677f9b329d52e2e9d64e126621a5229f5a5884d87827b9ad/Mapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/394cf11a64687141fd58fb926ff8b3d5a299eba3bbadaf2de9b93928d523d4/Type.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a614a754ab15364aa8ac82b190515fa48f911fb8282094b3f4f4144d126882/MapperConfigurationExpression.cs" root0="SKIP_HIGHLIGHTING" />
@@ -199,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709014291047</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="remove fields">
+      <option name="closed" value="true" />
+      <created>1709014434886</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1709014434886</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,7 +224,8 @@
     <MESSAGE value="remove async" />
     <MESSAGE value="remove unusing" />
     <MESSAGE value="reformat code" />
-    <option name="LAST_COMMIT_MESSAGE" value="reformat code" />
+    <MESSAGE value="remove fields" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove fields" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
