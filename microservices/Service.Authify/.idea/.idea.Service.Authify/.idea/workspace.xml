@@ -17,17 +17,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/DecodeJwtHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/Controller/UserCredentialController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/Controller/UserCredentialController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/DependencyInjectionContainer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/DependencyInjectionContainer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data.Abstractions/Repository/IUserCredentialRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data.Abstractions/Repository/IUserCredentialRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/GenerateTokenHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/GenerateTokenHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Services/IUserCredentialManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Services/IUserCredentialManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/UserCredentialManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/UserCredentialManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +33,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/3f1acb59718cadf111a0a796681e3d3509bb3381/src/Mvc/Mvc.ApiExplorer/src/DependencyInjection/EndpointMethodInfoApiExplorerServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1fce37416598a5fb677f9b329d52e2e9d64e126621a5229f5a5884d87827b9ad/Mapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/394cf11a64687141fd58fb926ff8b3d5a299eba3bbadaf2de9b93928d523d4/Type.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/64f62229ea25ec82851b50d463b5c1606d17866d927c27afb2f7b1e39f348/SecurityTokenDescriptor.cs" root0="SKIP_HIGHLIGHTING" />
@@ -143,7 +134,7 @@
       <workItem from="1707998689586" duration="28000" />
       <workItem from="1707998728611" duration="1468000" />
       <workItem from="1708072913078" duration="668000" />
-      <workItem from="1709293448554" duration="13225000" />
+      <workItem from="1709293448554" duration="15902000" />
     </task>
     <task id="LOCAL-00001" summary="Moved key generation to a separate class">
       <option name="closed" value="true" />
