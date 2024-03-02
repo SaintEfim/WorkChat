@@ -12,6 +12,7 @@ public static class DependencyInjectionContainer
         services.AddScoped<GenerateClaimsHelper>();
         services.AddScoped<GenerateKeyHelper>();
         services.AddScoped<GenerateTokenHelper>();
+        services.AddScoped<DecodeJwtHelper>();
         services.AddScoped<IUserCredentialRepository, UserCredentialRepository>();
         services.AddScoped<IUserCredentialManager, UserCredentialManager>();
         services.AddScoped<IUserCredentialProvider, UserCredentialProvider>();

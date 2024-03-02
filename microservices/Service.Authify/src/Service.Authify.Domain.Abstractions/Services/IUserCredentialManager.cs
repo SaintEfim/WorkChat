@@ -6,10 +6,14 @@ namespace Service.Authify.Domain.Services;
 public interface IUserCredentialManager
 {
     Task Register(
-        RegistrationRequest registrationRequest, 
+        RegistrationRequest registrationRequest,
         CancellationToken cancellationToken = default);
 
     Task<LoginResponse> Login(
         LoginRequest loginRequest,
+        CancellationToken cancellationToken = default);
+
+    Task<LoginResponse> Refresh(
+        string refreshToken,
         CancellationToken cancellationToken = default);
 }

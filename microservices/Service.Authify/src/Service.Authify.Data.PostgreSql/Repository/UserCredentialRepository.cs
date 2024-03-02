@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Service.Authify.Data.PostgreSql.Context;
 using Service.Authify.Data.Helpers;
@@ -44,14 +45,14 @@ namespace Service.Authify.Data.PostgreSql.Repository
                 _generateToken.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey,
                     TimeSpan.Parse(_accessHours));
             var refreshToken =
-                _generateToken.GenerateToken(user.Id.ToString(), null, _refreshSecretKey,
+                _generateToken.GenerateToken(user.Id.ToString(), user.Role, _refreshSecretKey,
                     TimeSpan.Parse(_refreshHours));
 
             return Task.FromResult(new LoginResponse
             {
                 TokenType = _tokenType,
                 AccessToken = accessToken,
-                ExpiresIn = (int)TimeSpan.FromHours(1).TotalSeconds,
+                ExpiresIn = (int)TimeSpan.Parse(_accessHours).TotalSeconds,
                 RefreshToken = refreshToken
             });
         }
@@ -70,7 +71,7 @@ namespace Service.Authify.Data.PostgreSql.Repository
             return userExists != null;
         }
 
-        public async Task<UserCredential?> GetUserByEmailAndPasswordAsync(LoginRequest loginRequest,
+        public async Task<UserCredential?> GetUserByEmailAndPassword(LoginRequest loginRequest,
             CancellationToken cancellationToken = default)
         {
             var userExists = await _context.UsersCredentials
@@ -78,6 +79,33 @@ namespace Service.Authify.Data.PostgreSql.Repository
                 .SingleOrDefaultAsync(cancellationToken);
 
             return userExists;
+        }
+
+        public Task<LoginResponse> Refresh(string refreshToken, CancellationToken cancellationToken = default)
+        {
+            var user = DecodeJwtHelper.DecodeToken(refreshToken, _refreshSecretKey);
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userRole = user.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userId == null || userRole == null)
+            {
+                throw new Exception("Invalid token. Missing required claims.");
+            }
+
+            var newAccessToken =
+                _generateToken.GenerateToken(userId, userRole, _accessSecretKey,
+                    TimeSpan.Parse(_accessHours));
+            var newRefreshToken =
+                _generateToken.GenerateToken(userId, userRole, _refreshSecretKey,
+                    TimeSpan.Parse(_refreshHours));
+
+            return Task.FromResult(new LoginResponse
+            {
+                TokenType = _tokenType,
+                AccessToken = newAccessToken,
+                ExpiresIn = (int)TimeSpan.Parse(_accessHours).TotalSeconds,
+                RefreshToken = newRefreshToken
+            });
         }
     }
 }

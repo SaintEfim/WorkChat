@@ -46,7 +46,8 @@ public class GenerateTokenHelper
                 new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
 
-        var token = tokenHandler.CreateToken(tokenDescriptor);
+        var token = tokenHandler.CreateJwtSecurityToken(tokenDescriptor);
+
         return tokenHandler.WriteToken(token);
     }
 }

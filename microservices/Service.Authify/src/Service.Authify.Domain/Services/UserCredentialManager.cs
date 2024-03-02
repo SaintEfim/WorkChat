@@ -38,13 +38,29 @@ public class UserCredentialManager : IUserCredentialManager
 
     public async Task<LoginResponse> Login(LoginRequest loginRequest, CancellationToken cancellationToken = default)
     {
-        var user = await _repository.GetUserByEmailAndPasswordAsync(loginRequest, cancellationToken);
+        var user = await _repository.GetUserByEmailAndPassword(loginRequest, cancellationToken);
         if (user == null)
         {
             throw new InvalidOperationException("Invalid email or password.");
         }
 
         var loginResponse = await _repository.Login(user, cancellationToken);
+        if (loginResponse == null)
+        {
+            throw new DataNotFoundException("Login response is null.");
+        }
+
+        return loginResponse;
+    }
+
+    public async Task<LoginResponse> Refresh(string refreshToken, CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrEmpty(refreshToken))
+        {
+            throw new ArgumentException("Refresh token is null or empty.", nameof(refreshToken));
+        }
+
+        var loginResponse = await _repository.Refresh(refreshToken, cancellationToken);
         if (loginResponse == null)
         {
             throw new DataNotFoundException("Login response is null.");

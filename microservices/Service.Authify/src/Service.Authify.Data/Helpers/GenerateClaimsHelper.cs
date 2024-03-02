@@ -8,7 +8,7 @@ public class GenerateClaimsHelper
     {
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, userId)
+            new Claim(ClaimTypes.NameIdentifier, userId)
         };
 
         if (!string.IsNullOrEmpty(role))
