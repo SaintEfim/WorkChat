@@ -18,9 +18,4 @@ public class RegistrationRequestDto
     /// </summary>
     [Required(ErrorMessage = "Password is required.")]
     public string Password { get; set; } = String.Empty;
-
-    /// <summary>
-    /// The role of the user, if applicable.
-    /// </summary>
-    public string? Role { get; set; }
 }

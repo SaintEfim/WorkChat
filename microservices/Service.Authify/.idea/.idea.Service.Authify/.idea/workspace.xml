@@ -16,8 +16,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/DecodeJwtHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data/Helpers/DecodeJwtHelper.cs" afterDir="false" />
+    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="reformat code">
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/Models/RequestsDto/RegistrationRequestDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/Models/RequestsDto/RegistrationRequestDto.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +33,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data/Helpers/DecodeJwtHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data/Helpers/GenerateClaimsHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/3f1acb59718cadf111a0a796681e3d3509bb3381/src/Mvc/Mvc.ApiExplorer/src/DependencyInjection/EndpointMethodInfoApiExplorerServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1fce37416598a5fb677f9b329d52e2e9d64e126621a5229f5a5884d87827b9ad/Mapper.cs" root0="SKIP_HIGHLIGHTING" />
@@ -138,7 +139,7 @@
       <workItem from="1707998689586" duration="28000" />
       <workItem from="1707998728611" duration="1468000" />
       <workItem from="1708072913078" duration="668000" />
-      <workItem from="1709293448554" duration="16884000" />
+      <workItem from="1709293448554" duration="18923000" />
     </task>
     <task id="LOCAL-00001" summary="Moved key generation to a separate class">
       <option name="closed" value="true" />
@@ -228,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709384078286</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="reformat code">
+      <option name="closed" value="true" />
+      <created>1709384879900</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1709384879900</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,24 +257,5 @@
     <MESSAGE value="removed unusing" />
     <MESSAGE value="reformat code" />
     <option name="LAST_COMMIT_MESSAGE" value="reformat code" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/src/Service.Authify.API/Controller/UserCredentialController.cs</url>
-          <line>27</line>
-          <properties documentPath="C:\NovGu\WorkChat\microservices\Service.Authify\src\Service.Authify.API\Controller\UserCredentialController.cs" initialLine="25" containingFunctionPresentation="Method 'Get'">
-            <startOffsets>
-              <option value="819" />
-            </startOffsets>
-            <endOffsets>
-              <option value="853" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
