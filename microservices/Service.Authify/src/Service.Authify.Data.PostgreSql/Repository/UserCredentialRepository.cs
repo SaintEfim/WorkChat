@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Service.Authify.Data.Exceptions;
 using Service.Authify.Data.PostgreSql.Context;
 using Service.Authify.Data.Helpers;
 using Service.Authify.Data.Repository;
@@ -83,14 +84,7 @@ namespace Service.Authify.Data.PostgreSql.Repository
 
         public Task<LoginResponse> Refresh(string refreshToken, CancellationToken cancellationToken = default)
         {
-            var user = DecodeJwtHelper.DecodeToken(refreshToken, _refreshSecretKey);
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var userRole = user.FindFirst(ClaimTypes.Role)?.Value;
-
-            if (userId == null || userRole == null)
-            {
-                throw new Exception("Invalid token. Missing required claims.");
-            }
+            var (userId, userRole) = DecodeRefreshToken(refreshToken);
 
             var newAccessToken =
                 _generateToken.GenerateToken(userId, userRole, _accessSecretKey,
@@ -106,6 +100,20 @@ namespace Service.Authify.Data.PostgreSql.Repository
                 ExpiresIn = (int)TimeSpan.Parse(_accessHours).TotalSeconds,
                 RefreshToken = newRefreshToken
             });
+        }
+
+        private (string UserId, string UserRole) DecodeRefreshToken(string refreshToken)
+        {
+            var user = DecodeJwtHelper.DecodeToken(refreshToken, _refreshSecretKey);
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userRole = user.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userId == null || userRole == null)
+            {
+                throw new InvalidTokenException("Invalid token. Missing required claims.");
+            }
+
+            return (userId, userRole);
         }
     }
 }
