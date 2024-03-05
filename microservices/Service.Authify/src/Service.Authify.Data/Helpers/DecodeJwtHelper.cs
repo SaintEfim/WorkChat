@@ -19,7 +19,7 @@ public class DecodeJwtHelper
             ValidateAudience = false,
             ClockSkew = TimeSpan.Zero,
         };
-        
+
         var principal = tokenHandler.ValidateToken(token, validationParameters, out _);
 
         return principal;
