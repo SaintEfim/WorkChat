@@ -19,6 +19,12 @@ public interface IUserCredentialRepository
 
     Task<bool> IsUniqueUser(string email, CancellationToken cancellationToken = default);
 
-    Task<UserCredential?> GetUserByEmailAndPasswordAsync(LoginRequest loginRequest,
+    Task<UserCredential?> GetUserByEmailAndPassword(LoginRequest loginRequest,
         CancellationToken cancellationToken = default);
+
+    Task<LoginResponse> Refresh(string refreshToken, CancellationToken cancellationToken = default);
+
+    Task<UserCredential> GetOneById(Guid id, CancellationToken cancellationToken = default);
+
+    Task Update(UserCredential user, CancellationToken cancellationToken = default);
 }

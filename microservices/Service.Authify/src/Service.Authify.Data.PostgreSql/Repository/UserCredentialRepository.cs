@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Service.Authify.Data.Exceptions;
 using Service.Authify.Data.PostgreSql.Context;
 using Service.Authify.Data.Helpers;
 using Service.Authify.Data.Repository;
@@ -44,14 +46,14 @@ namespace Service.Authify.Data.PostgreSql.Repository
                 _generateToken.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey,
                     TimeSpan.Parse(_accessHours));
             var refreshToken =
-                _generateToken.GenerateToken(user.Id.ToString(), null, _refreshSecretKey,
+                _generateToken.GenerateToken(user.Id.ToString(), user.Role, _refreshSecretKey,
                     TimeSpan.Parse(_refreshHours));
 
             return Task.FromResult(new LoginResponse
             {
                 TokenType = _tokenType,
                 AccessToken = accessToken,
-                ExpiresIn = (int)TimeSpan.FromHours(1).TotalSeconds,
+                ExpiresIn = (int)TimeSpan.Parse(_accessHours).TotalSeconds,
                 RefreshToken = refreshToken
             });
         }
@@ -70,7 +72,7 @@ namespace Service.Authify.Data.PostgreSql.Repository
             return userExists != null;
         }
 
-        public async Task<UserCredential?> GetUserByEmailAndPasswordAsync(LoginRequest loginRequest,
+        public async Task<UserCredential?> GetUserByEmailAndPassword(LoginRequest loginRequest,
             CancellationToken cancellationToken = default)
         {
             var userExists = await _context.UsersCredentials
@@ -78,6 +80,58 @@ namespace Service.Authify.Data.PostgreSql.Repository
                 .SingleOrDefaultAsync(cancellationToken);
 
             return userExists;
+        }
+
+        public Task<LoginResponse> Refresh(string refreshToken, CancellationToken cancellationToken = default)
+        {
+            var (userId, userRole) = DecodeRefreshToken(refreshToken);
+
+            var newAccessToken =
+                _generateToken.GenerateToken(userId, userRole, _accessSecretKey,
+                    TimeSpan.Parse(_accessHours));
+            var newRefreshToken =
+                _generateToken.GenerateToken(userId, userRole, _refreshSecretKey,
+                    TimeSpan.Parse(_refreshHours));
+
+            return Task.FromResult(new LoginResponse
+            {
+                TokenType = _tokenType,
+                AccessToken = newAccessToken,
+                ExpiresIn = (int)TimeSpan.Parse(_accessHours).TotalSeconds,
+                RefreshToken = newRefreshToken
+            });
+        }
+
+        public async Task<UserCredential> GetOneById(Guid id, CancellationToken cancellationToken)
+        {
+            var user = await _context.UsersCredentials.FindAsync(id, cancellationToken);
+
+            if (user == null)
+            {
+                throw new NotFoundUserException($"User with id {id} not found.");
+            }
+
+            return user;
+        }
+
+        public async Task Update(UserCredential user, CancellationToken cancellationToken)
+        {
+            _context.UsersCredentials.Update(user);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        private (string UserId, string UserRole) DecodeRefreshToken(string refreshToken)
+        {
+            var user = DecodeJwtHelper.DecodeToken(refreshToken, _refreshSecretKey);
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userRole = user.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userId == null || userRole == null)
+            {
+                throw new InvalidTokenException("Invalid token. Missing required claims.");
+            }
+
+            return (userId, userRole);
         }
     }
 }
