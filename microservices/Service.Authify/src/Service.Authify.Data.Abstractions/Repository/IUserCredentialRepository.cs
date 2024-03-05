@@ -23,4 +23,8 @@ public interface IUserCredentialRepository
         CancellationToken cancellationToken = default);
 
     Task<LoginResponse> Refresh(string refreshToken, CancellationToken cancellationToken = default);
+
+    Task<UserCredential> GetOneById(Guid id, CancellationToken cancellationToken = default);
+
+    Task Update(UserCredential user, CancellationToken cancellationToken = default);
 }

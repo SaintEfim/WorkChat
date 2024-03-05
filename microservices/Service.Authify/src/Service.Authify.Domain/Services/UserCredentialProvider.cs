@@ -24,4 +24,10 @@ public class UserCredentialProvider : IUserCredentialProvider
 
         return users!;
     }
+
+    public async Task<UserCredential> GetUserById(Guid id, CancellationToken cancellationToken = default)
+    {
+        var user = await _repository.GetOneById(id, cancellationToken);
+        return user;
+    }
 }

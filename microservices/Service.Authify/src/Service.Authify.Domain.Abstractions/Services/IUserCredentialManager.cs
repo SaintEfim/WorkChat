@@ -1,4 +1,5 @@
-﻿using Service.Authify.Domain.Models.Requests;
+﻿using Service.Authify.Domain.Models;
+using Service.Authify.Domain.Models.Requests;
 using Service.Authify.Domain.Models.Responses;
 
 namespace Service.Authify.Domain.Services;
@@ -16,4 +17,6 @@ public interface IUserCredentialManager
     Task<LoginResponse> Refresh(
         string refreshToken,
         CancellationToken cancellationToken = default);
+
+    Task UpdateUser(UserCredential user, CancellationToken cancellationToken = default);
 }

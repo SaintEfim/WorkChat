@@ -7,6 +7,10 @@ namespace Service.Authify.API.Models;
 /// </summary>
 public class UserCredentialDto
 {
+    /// <inheridoc/>
+    [Required]
+    public Guid Id { get; set; }
+    
     /// <summary>
     /// The email address of the user.
     /// </summary>

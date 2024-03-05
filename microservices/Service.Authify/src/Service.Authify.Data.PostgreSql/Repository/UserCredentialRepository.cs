@@ -102,6 +102,24 @@ namespace Service.Authify.Data.PostgreSql.Repository
             });
         }
 
+        public async Task<UserCredential> GetOneById(Guid id, CancellationToken cancellationToken)
+        {
+            var user = await _context.UsersCredentials.FindAsync(id, cancellationToken);
+
+            if (user == null)
+            {
+                throw new NotFoundUserException($"User with id {id} not found.");
+            }
+
+            return user;
+        }
+
+        public async Task Update(UserCredential user, CancellationToken cancellationToken)
+        {
+            _context.UsersCredentials.Update(user);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
         private (string UserId, string UserRole) DecodeRefreshToken(string refreshToken)
         {
             var user = DecodeJwtHelper.DecodeToken(refreshToken, _refreshSecretKey);

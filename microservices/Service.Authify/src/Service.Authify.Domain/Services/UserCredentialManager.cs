@@ -68,4 +68,9 @@ public class UserCredentialManager : IUserCredentialManager
 
         return loginResponse;
     }
+
+    public async Task UpdateUser(UserCredential user, CancellationToken cancellationToken = default)
+    {
+        await _repository.Update(user, cancellationToken);
+    }
 }
