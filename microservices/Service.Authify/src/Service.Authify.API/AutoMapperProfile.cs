@@ -13,6 +13,7 @@ public sealed class AutoMapperProfile : Profile
     public AutoMapperProfile()
     {
         CreateMap<UserCredential, UserCredentialDto>();
+        CreateMap<LoginRequestDto, UserCredential>();
         CreateMap<RegistrationRequestDto, RegistrationRequest>();
         CreateMap<LoginRequestDto, LoginRequest>();
         CreateMap<LoginResponse, LoginResponseDto>();

@@ -1,9 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
-using Service.Authify.Data.Exceptions;
+using Service.Authify.Domain.Exceptions;
 
-namespace Service.Authify.Data.Helpers;
+namespace Service.Authify.Domain.Helpers;
 
 public class GenerateTokenHelper
 {
