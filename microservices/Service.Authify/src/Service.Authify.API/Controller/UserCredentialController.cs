@@ -53,7 +53,7 @@ public class UserCredentialController : ControllerBase
     public async Task<ActionResult<LoginResponseDto>> UserCredentialLogin(LoginRequestDto loginRequest,
         CancellationToken cancellationToken = default)
     {
-        var res = await _manager.Login(_mapper.Map<LoginRequest>(loginRequest), cancellationToken);
+        var res = await _manager.Login(_mapper.Map<UserCredential>(loginRequest), cancellationToken);
         return Ok(_mapper.Map<LoginResponseDto>(res));
     }
 
@@ -63,7 +63,7 @@ public class UserCredentialController : ControllerBase
     public async Task<ActionResult<LoginResponseDto>> UserCredentialRefresh(string refreshToken,
         CancellationToken cancellationToken = default)
     {
-        var res = await _manager.Refresh(refreshToken, cancellationToken);
+        var res = await _manager.Refresh(refreshToken);
         return Ok(_mapper.Map<LoginResponseDto>(res));
     }
 
@@ -81,6 +81,6 @@ public class UserCredentialController : ControllerBase
         _mapper.Map(userUpdate, user);
         user.UpdatedAt = DateTime.UtcNow;
         await _manager.UpdateUser(user, cancellationToken);
-        return NoContent();
+        return Ok();
     }
 }

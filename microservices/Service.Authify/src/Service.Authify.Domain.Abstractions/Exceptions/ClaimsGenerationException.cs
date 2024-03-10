@@ -1,4 +1,4 @@
-﻿namespace Service.Authify.Data.Exceptions;
+﻿namespace Service.Authify.Domain.Exceptions;
 
 public class ClaimsGenerationException : Exception
 {

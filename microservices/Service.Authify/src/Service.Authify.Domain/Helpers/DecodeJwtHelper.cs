@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Service.Authify.Data.Helpers;
+namespace Service.Authify.Domain.Helpers;
 
 public class DecodeJwtHelper
 {

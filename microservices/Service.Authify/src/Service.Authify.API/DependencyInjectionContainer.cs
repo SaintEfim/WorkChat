@@ -1,4 +1,4 @@
-﻿using Service.Authify.Data.Helpers;
+﻿using Service.Authify.Domain.Helpers;
 using Service.Authify.Data.PostgreSql.Repository;
 using Service.Authify.Data.Repository;
 using Service.Authify.Domain.Services;

@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace Service.Authify.Data.Helpers;
+namespace Service.Authify.Domain.Helpers;
 
 public class GenerateClaimsHelper
 {
