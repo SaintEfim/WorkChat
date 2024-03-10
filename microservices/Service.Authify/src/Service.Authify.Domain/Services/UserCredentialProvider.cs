@@ -15,7 +15,7 @@ public class UserCredentialProvider : IUserCredentialProvider
 
     public async Task<ICollection<UserCredential>> Get(CancellationToken cancellationToken = default)
     {
-        var users = await _repository.Get();
+        var users = await _repository.Get(cancellationToken);
 
         if (users != null && !users.Any())
         {
