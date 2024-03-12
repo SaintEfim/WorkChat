@@ -13,7 +13,7 @@ public class JwtHelper : IJwtHelper
     {
         if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(secretKey))
         {
-            throw new InvalidOperationException($"{userId} or {secretKey} must not be null or empty.");
+            throw new InvalidOperationException($"{nameof(userId)} or {nameof(secretKey)} must not be null or empty.");
         }
 
         var tokenHandler = new JwtSecurityTokenHandler();
@@ -47,9 +47,19 @@ public class JwtHelper : IJwtHelper
     public async Task<ClaimsPrincipal> DecodeToken(string token, string secretKey,
         CancellationToken cancellationToken = default)
     {
+        if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(secretKey))
+        {
+            throw new InvalidOperationException("Token or secretKey must not be null or empty.");
+        }
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = new SymmetricSecurityKey(await GenerateKey(secretKey, cancellationToken));
-
+        
+        if (key == null)
+        {
+            throw new KeyGenerationException("Failed to generate key.");
+        }
+        
         var validationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
@@ -66,13 +76,16 @@ public class JwtHelper : IJwtHelper
 
     private static Task<byte[]> GenerateKey(string secretKey, CancellationToken cancellationToken = default)
     {
+        ArgumentException.ThrowIfNullOrEmpty(secretKey);
         cancellationToken.ThrowIfCancellationRequested();
 
         return Task.FromResult(Encoding.UTF8.GetBytes(secretKey));
     }
 
-    private static Task<List<Claim>> GenerateClaims(string userId, string? role, CancellationToken cancellationToken = default)
+    private static Task<List<Claim>> GenerateClaims(string userId, string? role,
+        CancellationToken cancellationToken = default)
     {
+        ArgumentException.ThrowIfNullOrEmpty(userId);
         cancellationToken.ThrowIfCancellationRequested();
 
         var claims = new List<Claim>
