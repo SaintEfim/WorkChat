@@ -17,17 +17,25 @@ public class UserCredentialProvider : IUserCredentialProvider
     {
         var users = await _repository.Get(cancellationToken);
 
-        if (users != null && !users.Any())
+        if (users is { Count: 0 })
         {
             throw new DataNotFoundException("No users found.");
         }
 
-        return users!;
+        return users;
     }
 
     public async Task<UserCredential> GetUserById(Guid id, CancellationToken cancellationToken = default)
     {
+        ArgumentNullException.ThrowIfNull(id);
+
         var user = await _repository.GetOneById(id, cancellationToken);
+
+        if (user == null)
+        {
+            throw new NotFoundUserException($"User with id {id} not found.");
+        }
+
         return user;
     }
 }

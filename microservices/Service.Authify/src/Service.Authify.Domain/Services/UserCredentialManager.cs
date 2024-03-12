@@ -36,6 +36,8 @@ public class UserCredentialManager : IUserCredentialManager
 
     public async Task Register(RegistrationRequest registrationRequest, CancellationToken cancellationToken = default)
     {
+        ArgumentNullException.ThrowIfNull(registrationRequest);
+
         if (await IsUniqueUser(registrationRequest.Email, cancellationToken))
         {
             throw new DuplicateUserException(
@@ -55,8 +57,15 @@ public class UserCredentialManager : IUserCredentialManager
 
     public async Task<LoginResponse> Login(LoginRequest loginRequest, CancellationToken cancellationToken = default)
     {
+        ArgumentNullException.ThrowIfNull(loginRequest);
+
         var user = await GetUserByEmailAndPassword(loginRequest, cancellationToken);
-        
+
+        if (user == null)
+        {
+            throw new NotFoundUserException($"User with email {loginRequest.Email} not found.");
+        }
+
         var accessToken = await
             _jwtHelper.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey,
                 TimeSpan.Parse(_accessHours), cancellationToken);
@@ -75,6 +84,8 @@ public class UserCredentialManager : IUserCredentialManager
 
     public async Task<LoginResponse> Refresh(string refreshToken, CancellationToken cancellationToken = default)
     {
+        ArgumentNullException.ThrowIfNull(refreshToken);
+
         var (userId, userRole) = await DecodeRefreshToken(refreshToken, cancellationToken);
 
         var newAccessToken = await
@@ -95,12 +106,16 @@ public class UserCredentialManager : IUserCredentialManager
 
     public async Task UpdateUser(UserCredential user, CancellationToken cancellationToken = default)
     {
+        ArgumentNullException.ThrowIfNull(user);
+
         await _repository.Update(user, cancellationToken);
     }
 
     private async Task<(string UserId, string UserRole)> DecodeRefreshToken(string refreshToken,
         CancellationToken cancellationToken = default)
     {
+        ArgumentNullException.ThrowIfNull(refreshToken);
+
         var user = await _jwtHelper.DecodeToken(refreshToken, _refreshSecretKey, cancellationToken);
         var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var userRole = user.FindFirst(ClaimTypes.Role)?.Value;
@@ -115,18 +130,27 @@ public class UserCredentialManager : IUserCredentialManager
 
     private async Task<bool> IsUniqueUser(string email, CancellationToken cancellationToken = default)
     {
+        ArgumentNullException.ThrowIfNull(email);
+
         var userExists = await _repository.Get(cancellationToken);
         var result = userExists.SingleOrDefault(u => u.Email == email);
 
         return result != null;
     }
 
-    public async Task<UserCredential?> GetUserByEmailAndPassword(LoginRequest loginRequest,
+    private async Task<UserCredential?> GetUserByEmailAndPassword(LoginRequest loginRequest,
         CancellationToken cancellationToken = default)
     {
-        var userExists = await _repository.Get(cancellationToken);
-        var result = userExists.SingleOrDefault(u => u.Email == loginRequest.Email);
+        ArgumentNullException.ThrowIfNull(loginRequest);
 
-        return result;
+        var userExists = await _repository.Get(cancellationToken);
+        var user = userExists.SingleOrDefault(u => u.Email == loginRequest.Email);
+
+        if (user == null)
+        {
+            throw new NotFoundUserException($"User with email {loginRequest.Email} not found.");
+        }
+
+        return user;
     }
 }

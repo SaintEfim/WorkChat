@@ -4,7 +4,6 @@ using Service.Authify.API.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Service.Authify.API.Models.RequestsDto;
 using Service.Authify.API.Models.ResponsesDto;
-using Service.Authify.Domain.Models;
 using Service.Authify.Domain.Models.Requests;
 using Service.Authify.Domain.Services;
 using Swashbuckle.AspNetCore.Annotations;
@@ -63,7 +62,7 @@ public class UserCredentialController : ControllerBase
     public async Task<ActionResult<LoginResponseDto>> UserCredentialRefresh(string refreshToken,
         CancellationToken cancellationToken = default)
     {
-        var res = await _manager.Refresh(refreshToken);
+        var res = await _manager.Refresh(refreshToken, cancellationToken);
         return Ok(_mapper.Map<LoginResponseDto>(res));
     }
 

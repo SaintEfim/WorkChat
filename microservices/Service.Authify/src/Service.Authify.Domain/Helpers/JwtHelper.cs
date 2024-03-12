@@ -56,7 +56,7 @@ public class JwtHelper : IJwtHelper
             IssuerSigningKey = key,
             ValidateIssuer = false,
             ValidateAudience = false,
-            ClockSkew = TimeSpan.Zero,
+            ClockSkew = TimeSpan.Zero
         };
 
         var principal = tokenHandler.ValidateToken(token, validationParameters, out _);
@@ -64,14 +64,14 @@ public class JwtHelper : IJwtHelper
         return principal;
     }
 
-    private Task<byte[]> GenerateKey(string secretKey, CancellationToken cancellationToken = default)
+    private static Task<byte[]> GenerateKey(string secretKey, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
         return Task.FromResult(Encoding.UTF8.GetBytes(secretKey));
     }
 
-    private Task<List<Claim>> GenerateClaims(string userId, string? role, CancellationToken cancellationToken = default)
+    private static Task<List<Claim>> GenerateClaims(string userId, string? role, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
