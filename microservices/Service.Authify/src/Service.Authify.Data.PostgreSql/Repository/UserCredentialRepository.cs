@@ -1,79 +1,48 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Service.Authify.Data.Exceptions;
 using Service.Authify.Data.PostgreSql.Context;
 using Service.Authify.Data.Repository;
 using Service.Authify.Domain.Models;
 
-namespace Service.Authify.Data.PostgreSql.Repository
+namespace Service.Authify.Data.PostgreSql.Repository;
+
+public class UserCredentialRepository : IUserCredentialRepository
 {
-    public class UserCredentialRepository : IUserCredentialRepository
+    private readonly ApplicationDbContext _context;
+
+    public UserCredentialRepository(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public UserCredentialRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    public async Task<ICollection<UserCredential>> Get(CancellationToken cancellationToken = default)
+    {
+        return await _context.UsersCredentials.ToListAsync(cancellationToken);
+    }
 
-        public async Task Create(UserCredential user, CancellationToken cancellationToken = default)
-        {
-            if (user == null)
-            {
-                throw new ArgumentNullException(nameof(user));
-            }
+    public async Task Create(UserCredential user, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(user);
 
-            try
-            {
-                await _context.UsersCredentials.AddAsync(user, cancellationToken);
-                await _context.SaveChangesAsync(cancellationToken);
-            }
-            catch (DbUpdateException ex)
-            {
-                throw new DatabaseAccessException("Ошибка при сохранении данных в базе данных.", ex);
-            }
-        }
+        await _context.UsersCredentials.AddAsync(user, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+    }
 
-        public async Task<ICollection<UserCredential>> Get(CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                return await _context.UsersCredentials.ToListAsync(cancellationToken);
-            }
-            catch (DbUpdateException ex)
-            {
-                throw new DatabaseAccessException("Ошибка при получении данных из базы данных.", ex);
-            }
-        }
+    public async Task<UserCredential?> GetOneById(Guid id, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(id);
 
-        public async Task<UserCredential> GetOneById(Guid id, CancellationToken cancellationToken = default)
-        {
-            var user = await _context.UsersCredentials
-                .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
 
-            if (user == null)
-            {
-                throw new NotFoundUserException($"User with id {id} not found.");
-            }
+        var user = await _context.UsersCredentials
+            .SingleOrDefaultAsync(u => u.Id == id, cancellationToken);
 
-            return user;
-        }
+        return user;
+    }
 
-        public async Task Update(UserCredential user, CancellationToken cancellationToken = default)
-        {
-            if (user == null)
-            {
-                throw new ArgumentNullException(nameof(user));
-            }
+    public async Task Update(UserCredential user, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(user);
 
-            try
-            {
-                _context.UsersCredentials.Update(user);
-                await _context.SaveChangesAsync(cancellationToken);
-            }
-            catch (DbUpdateException ex)
-            {
-                throw new DatabaseAccessException("Ошибка при обновлении данных в базы данных.", ex);
-            }
-        }
+        _context.UsersCredentials.Update(user);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

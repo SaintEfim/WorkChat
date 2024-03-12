@@ -9,7 +9,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapperFromAllAssemblies();
 builder.Services.AddControllers().AddNewtonsoftJson();
-;
 builder.Services.AddDependencyInjection();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

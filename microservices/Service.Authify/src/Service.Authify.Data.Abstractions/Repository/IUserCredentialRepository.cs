@@ -11,7 +11,7 @@ public interface IUserCredentialRepository
     Task<ICollection<UserCredential>> Get(
         CancellationToken cancellationToken = default);
 
-    Task<UserCredential> GetOneById(Guid id, CancellationToken cancellationToken = default);
+    Task<UserCredential?> GetOneById(Guid id, CancellationToken cancellationToken = default);
 
     Task Update(UserCredential user, CancellationToken cancellationToken = default);
 }
