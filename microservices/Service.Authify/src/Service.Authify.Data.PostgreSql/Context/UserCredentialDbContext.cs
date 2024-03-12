@@ -3,9 +3,9 @@ using Service.Authify.Domain.Models;
 
 namespace Service.Authify.Data.PostgreSql.Context;
 
-public sealed class ApplicationDbContext : DbContext
+public sealed class UserCredentialDbContext : DbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    public UserCredentialDbContext(DbContextOptions<UserCredentialDbContext> options) : base(options)
     {
         Database.Migrate();
     }
