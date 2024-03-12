@@ -11,7 +11,7 @@ builder.Services.AddAutoMapperFromAllAssemblies();
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddDependencyInjection();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<UserCredentialDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("PSQL"), action => { action.CommandTimeout(30); });
     options.EnableDetailedErrors();

@@ -10,7 +10,7 @@ using Service.Authify.Data.PostgreSql.Context;
 
 namespace Service.Authify.Data.PostgreSql.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(UserCredentialDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

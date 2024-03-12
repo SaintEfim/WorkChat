@@ -10,4 +10,8 @@
         <ProjectReference Include="..\Service.Authify.Data.Abstractions\Service.Authify.Data.Abstractions.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
+    </ItemGroup>
+
 </Project>

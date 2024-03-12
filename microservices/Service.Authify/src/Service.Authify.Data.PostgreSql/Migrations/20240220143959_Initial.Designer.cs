@@ -11,7 +11,7 @@ using Service.Authify.Data.PostgreSql.Context;
 
 namespace Service.Authify.Data.PostgreSql.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(UserCredentialDbContext))]
     [Migration("20240220143959_Initial")]
     partial class Initial
     {
