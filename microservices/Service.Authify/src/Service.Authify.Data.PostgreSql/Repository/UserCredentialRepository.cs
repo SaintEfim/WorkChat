@@ -15,6 +15,18 @@ namespace Service.Authify.Data.PostgreSql.Repository
             _context = context;
         }
 
+        public async Task<ICollection<UserCredential>> Get(CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await _context.UsersCredentials.ToListAsync(cancellationToken);
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new DatabaseAccessException("Ошибка при получении данных из базы данных.", ex);
+            }
+        }
+
         public async Task Create(UserCredential user, CancellationToken cancellationToken = default)
         {
             if (user == null)
@@ -30,18 +42,6 @@ namespace Service.Authify.Data.PostgreSql.Repository
             catch (DbUpdateException ex)
             {
                 throw new DatabaseAccessException("Ошибка при сохранении данных в базе данных.", ex);
-            }
-        }
-
-        public async Task<ICollection<UserCredential>> Get(CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                return await _context.UsersCredentials.ToListAsync(cancellationToken);
-            }
-            catch (DbUpdateException ex)
-            {
-                throw new DatabaseAccessException("Ошибка при получении данных из базы данных.", ex);
             }
         }
 

@@ -14,19 +14,19 @@ public class UserCredentialManager : IUserCredentialManager
 {
     private readonly IUserCredentialRepository _repository;
     private readonly IMapper _mapper;
-    private readonly GenerateTokenHelper _generateToken;
+    private readonly IJwtHelper _jwtHelper;
     private readonly string _tokenType;
     private readonly string _accessHours;
     private readonly string _refreshHours;
     private readonly string _accessSecretKey;
     private readonly string _refreshSecretKey;
 
-    public UserCredentialManager(IUserCredentialRepository repository, IMapper mapper,
-        GenerateTokenHelper generateToken, IConfiguration config)
+    public UserCredentialManager(IUserCredentialRepository repository, IMapper mapper, IConfiguration config,
+        IJwtHelper jwtHelper)
     {
         _repository = repository;
         _mapper = mapper;
-        _generateToken = generateToken;
+        _jwtHelper = jwtHelper;
         _tokenType = config.GetValue<string>("TokenType")!;
         _accessHours = config.GetValue<string>("HoursSettings:AccessHours")!;
         _refreshHours = config.GetValue<string>("HoursSettings:RefreshHours")!;
@@ -53,47 +53,55 @@ public class UserCredentialManager : IUserCredentialManager
         await _repository.Create(user, cancellationToken);
     }
 
-    public Task<LoginResponse> Login(UserCredential user, CancellationToken cancellationToken = default)
+    public async Task<LoginResponse> Login(LoginRequest loginRequest, CancellationToken cancellationToken = default)
     {
-        var accessToken =
-            _generateToken.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey,
-                TimeSpan.Parse(_accessHours));
-        var refreshToken =
-            _generateToken.GenerateToken(user.Id.ToString(), user.Role, _refreshSecretKey,
-                TimeSpan.Parse(_refreshHours));
+        var user = await GetUserByEmailAndPassword(loginRequest, cancellationToken);
+        
+        var accessToken = await
+            _jwtHelper.GenerateToken(user.Id.ToString(), user.Role, _accessSecretKey,
+                TimeSpan.Parse(_accessHours), cancellationToken);
+        var refreshToken = await
+            _jwtHelper.GenerateToken(user.Id.ToString(), user.Role, _refreshSecretKey,
+                TimeSpan.Parse(_refreshHours), cancellationToken);
 
-        return Task.FromResult(new LoginResponse
+        return new LoginResponse
         {
             TokenType = _tokenType,
             AccessToken = accessToken,
             ExpiresIn = (int)TimeSpan.Parse(_accessHours).TotalSeconds,
             RefreshToken = refreshToken
-        });
+        };
     }
 
-    public Task<LoginResponse> Refresh(string refreshToken, CancellationToken cancellationToken = default)
+    public async Task<LoginResponse> Refresh(string refreshToken, CancellationToken cancellationToken = default)
     {
-        var (userId, userRole) = DecodeRefreshToken(refreshToken);
+        var (userId, userRole) = await DecodeRefreshToken(refreshToken, cancellationToken);
 
-        var newAccessToken =
-            _generateToken.GenerateToken(userId, userRole, _accessSecretKey,
-                TimeSpan.Parse(_accessHours));
-        var newRefreshToken =
-            _generateToken.GenerateToken(userId, userRole, _refreshSecretKey,
-                TimeSpan.Parse(_refreshHours));
+        var newAccessToken = await
+            _jwtHelper.GenerateToken(userId, userRole, _accessSecretKey,
+                TimeSpan.Parse(_accessHours), cancellationToken);
+        var newRefreshToken = await
+            _jwtHelper.GenerateToken(userId, userRole, _refreshSecretKey,
+                TimeSpan.Parse(_refreshHours), cancellationToken);
 
-        return Task.FromResult(new LoginResponse
+        return new LoginResponse
         {
             TokenType = _tokenType,
             AccessToken = newAccessToken,
             ExpiresIn = (int)TimeSpan.Parse(_accessHours).TotalSeconds,
             RefreshToken = newRefreshToken
-        });
+        };
     }
 
-    private (string UserId, string UserRole) DecodeRefreshToken(string refreshToken)
+    public async Task UpdateUser(UserCredential user, CancellationToken cancellationToken = default)
     {
-        var user = DecodeJwtHelper.DecodeToken(refreshToken, _refreshSecretKey);
+        await _repository.Update(user, cancellationToken);
+    }
+
+    private async Task<(string UserId, string UserRole)> DecodeRefreshToken(string refreshToken,
+        CancellationToken cancellationToken = default)
+    {
+        var user = await _jwtHelper.DecodeToken(refreshToken, _refreshSecretKey, cancellationToken);
         var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var userRole = user.FindFirst(ClaimTypes.Role)?.Value;
 
@@ -109,12 +117,16 @@ public class UserCredentialManager : IUserCredentialManager
     {
         var userExists = await _repository.Get(cancellationToken);
         var result = userExists.SingleOrDefault(u => u.Email == email);
-        
+
         return result != null;
     }
 
-    public async Task UpdateUser(UserCredential user, CancellationToken cancellationToken = default)
+    public async Task<UserCredential?> GetUserByEmailAndPassword(LoginRequest loginRequest,
+        CancellationToken cancellationToken = default)
     {
-        await _repository.Update(user, cancellationToken);
+        var userExists = await _repository.Get(cancellationToken);
+        var result = userExists.SingleOrDefault(u => u.Email == loginRequest.Email);
+
+        return result;
     }
 }

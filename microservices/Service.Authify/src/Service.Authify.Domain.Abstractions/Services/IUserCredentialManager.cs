@@ -11,7 +11,7 @@ public interface IUserCredentialManager
         CancellationToken cancellationToken = default);
 
     Task<LoginResponse> Login(
-        UserCredential user,
+        LoginRequest user,
         CancellationToken cancellationToken = default);
 
     Task<LoginResponse> Refresh(

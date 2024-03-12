@@ -53,7 +53,7 @@ public class UserCredentialController : ControllerBase
     public async Task<ActionResult<LoginResponseDto>> UserCredentialLogin(LoginRequestDto loginRequest,
         CancellationToken cancellationToken = default)
     {
-        var res = await _manager.Login(_mapper.Map<UserCredential>(loginRequest), cancellationToken);
+        var res = await _manager.Login(_mapper.Map<LoginRequest>(loginRequest), cancellationToken);
         return Ok(_mapper.Map<LoginResponseDto>(res));
     }
 

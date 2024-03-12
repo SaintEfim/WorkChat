@@ -9,10 +9,7 @@ public static class DependencyInjectionContainer
 {
     public static IServiceCollection AddDependencyInjection(this IServiceCollection services)
     {
-        services.AddScoped<GenerateClaimsHelper>();
-        services.AddScoped<GenerateKeyHelper>();
-        services.AddScoped<GenerateTokenHelper>();
-        services.AddScoped<DecodeJwtHelper>();
+        services.AddScoped<IJwtHelper, JwtHelper>();
         services.AddScoped<IUserCredentialRepository, UserCredentialRepository>();
         services.AddScoped<IUserCredentialManager, UserCredentialManager>();
         services.AddScoped<IUserCredentialProvider, UserCredentialProvider>();
