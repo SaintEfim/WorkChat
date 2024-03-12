@@ -11,13 +11,13 @@ public class LoginResponseDto
     /// The type of token.
     /// </summary>
     [Required(ErrorMessage = "TokenType is required.")]
-    public string TokenType { get; set; } = String.Empty;
+    public string TokenType { get; set; } = string.Empty;
 
     /// <summary>
     /// The access token.
     /// </summary>
     [Required(ErrorMessage = "AccessToken is required.")]
-    public string AccessToken { get; set; } = String.Empty;
+    public string AccessToken { get; set; } = string.Empty;
 
     /// <summary>
     /// The expiration time of the access token in seconds.
@@ -29,5 +29,5 @@ public class LoginResponseDto
     /// The refresh token.
     /// </summary>
     [Required(ErrorMessage = "RefreshToken is required.")]
-    public string RefreshToken { get; set; } = String.Empty;
+    public string RefreshToken { get; set; } = string.Empty;
 }
