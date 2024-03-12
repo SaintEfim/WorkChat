@@ -11,11 +11,11 @@ public class LoginRequestDto
     /// The email address of the user.
     /// </summary>
     [Required(ErrorMessage = "Email is required.")]
-    public string Email { get; set; } = String.Empty;
+    public string Email { get; set; } = string.Empty;
 
     /// <summary>
     /// The password of the user.
     /// </summary>
     [Required(ErrorMessage = "Password is required.")]
-    public string Password { get; set; } = String.Empty;
+    public string Password { get; set; } = string.Empty;
 }
