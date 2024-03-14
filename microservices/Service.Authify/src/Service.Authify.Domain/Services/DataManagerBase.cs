@@ -3,28 +3,33 @@ using Service.Authify.Data.Repository;
 
 namespace Service.Authify.Domain.Services;
 
-public abstract class DataManagerBase<TRepository, TEntity> : IDataManager<TEntity>
-    where TRepository : IRepository<TEntity>
+public abstract class DataManagerBase<TRepository, TModel> : IDataManager<TModel>
+    where TRepository : IRepository<TModel>
 {
     protected DataManagerBase(
         IMapper mapper,
         TRepository repository
     )
     {
-        this.Mapper = mapper;
-        this.Repository = repository;
+        Mapper = mapper;
+        Repository = repository;
     }
 
     protected IMapper Mapper { get; }
     protected TRepository Repository { get; }
 
-    public async Task Create(TEntity entity, CancellationToken cancellationToken = default)
+    public virtual async Task Create(TModel entity, CancellationToken cancellationToken = default)
     {
-        await this.Repository.Create(entity, cancellationToken);
+        await Repository.Create(entity, cancellationToken);
     }
 
-    public async Task Update(TEntity entity, CancellationToken cancellationToken = default)
+    public async Task Update(TModel entity, CancellationToken cancellationToken = default)
     {
-        await this.Repository.Update(entity, cancellationToken);
+        await Repository.Update(entity, cancellationToken);
+    }
+
+    public Task Delete(Guid id, CancellationToken cancellationToken = default)
+    {
+        return Repository.Delete(id, cancellationToken);
     }
 }

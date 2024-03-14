@@ -6,4 +6,5 @@ public interface IRepository<TEntity>
     Task Create(TEntity entity, CancellationToken cancellationToken = default);
     Task<TEntity?> GetOneById(Guid id, CancellationToken cancellationToken = default);
     Task Update(TEntity entity, CancellationToken cancellationToken = default);
+    Task Delete(Guid id, CancellationToken cancellationToken = default);
 }
