@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Service.Authify.Data.Repository;
 using Service.Authify.Domain.Exceptions;
 using Service.Authify.Domain.Helpers;
@@ -10,7 +11,8 @@ using Service.Authify.Domain.Models.Responses;
 
 namespace Service.Authify.Domain.Services;
 
-public class UserCredentialManager : DataManagerBase<IUserCredentialRepository, UserCredential>, IUserCredentialManager
+public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUserCredentialRepository, UserCredential>,
+    IUserCredentialManager
 {
     private readonly IJwtHelper _jwtHelper;
     private readonly IHashHelper _hashHelper;
@@ -20,8 +22,10 @@ public class UserCredentialManager : DataManagerBase<IUserCredentialRepository, 
     private readonly string _accessSecretKey;
     private readonly string _refreshSecretKey;
 
-    public UserCredentialManager(IMapper mapper, IUserCredentialRepository repository, IConfiguration config,
-        IJwtHelper jwtHelper, IHashHelper hashHelper) : base(mapper, repository)
+    public UserCredentialManager(IMapper mapper, ILogger<UserCredentialManager> logger,
+        IUserCredentialRepository repository,
+        IConfiguration config,
+        IJwtHelper jwtHelper, IHashHelper hashHelper) : base(mapper, logger, repository)
     {
         _jwtHelper = jwtHelper;
         _hashHelper = hashHelper;

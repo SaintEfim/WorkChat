@@ -1,30 +1,53 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using Service.Authify.Data.Repository;
 
 namespace Service.Authify.Domain.Services;
 
-public abstract class DataProviderBase<TRepository, TModel> : IDataProvider<TModel>
-    where TRepository : IRepository<TModel>
+public abstract class DataProviderBase<TProvider, TRepository, TDomain> : IDataProvider<TDomain>
+    where TProvider : IDataProvider<TDomain>
+    where TRepository : IRepository<TDomain>
 {
     protected DataProviderBase(
         IMapper mapper,
+        ILogger<TProvider> logger,
         TRepository repository
     )
     {
         Mapper = mapper;
+        Logger = logger;
         Repository = repository;
     }
 
-    private IMapper Mapper { get; }
-    private TRepository Repository { get; }
+    protected IMapper Mapper { get; }
 
-    public virtual async Task<ICollection<TModel>> Get(CancellationToken cancellationToken = default)
+    protected TRepository Repository { get; }
+
+    protected ILogger<TProvider> Logger { get; }
+
+    public virtual async Task<ICollection<TDomain>> Get(CancellationToken cancellationToken = default)
     {
-        return await Repository.Get(cancellationToken);
+        try
+        {
+            return await Repository.Get(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, $"Error while receiving data: {ex.Message}");
+            throw;
+        }
     }
 
-    public async Task<TModel?> GetOneById(Guid id, CancellationToken cancellationToken = default)
+    public async Task<TDomain?> GetOneById(Guid id, CancellationToken cancellationToken = default)
     {
-        return await Repository.GetOneById(id, cancellationToken);
+        try
+        {
+            return await Repository.GetOneById(id, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, $"Error when retrieving data by ID: {ex.Message}");
+            throw;
+        }
     }
 }

@@ -1,35 +1,68 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using Service.Authify.Data.Repository;
 
 namespace Service.Authify.Domain.Services;
 
-public abstract class DataManagerBase<TRepository, TModel> : IDataManager<TModel>
-    where TRepository : IRepository<TModel>
+public abstract class DataManagerBase<TManager, TRepository, TDomain> : IDataManager<TDomain>
+    where TManager : IDataManager<TDomain>
+    where TRepository : IRepository<TDomain>
 {
     protected DataManagerBase(
         IMapper mapper,
+        ILogger<TManager> logger,
         TRepository repository
     )
     {
         Mapper = mapper;
+        Logger = logger;
         Repository = repository;
     }
 
     protected IMapper Mapper { get; }
+
     protected TRepository Repository { get; }
 
-    public virtual async Task Create(TModel entity, CancellationToken cancellationToken = default)
+    protected ILogger<TManager> Logger { get; }
+
+    public virtual async Task Create(TDomain entity, CancellationToken cancellationToken = default)
     {
-        await Repository.Create(entity, cancellationToken);
+        try
+        {
+            await Repository.Create(entity, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, $"Error creating entity: {ex.Message}");
+            throw;
+        }
     }
 
-    public async Task Update(TModel entity, CancellationToken cancellationToken = default)
+    public async Task Update(TDomain entity, CancellationToken cancellationToken = default)
     {
-        await Repository.Update(entity, cancellationToken);
+        try
+        {
+            await Repository.Update(entity, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, $"Error updating entity: {ex.Message}");
+            throw;
+        }
     }
 
     public Task Delete(Guid id, CancellationToken cancellationToken = default)
     {
-        return Repository.Delete(id, cancellationToken);
+        try
+        {
+            ArgumentNullException.ThrowIfNull(id);
+
+            return Repository.Delete(id, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, $"Error when deleting an entity: {ex.Message}");
+            throw;
+        }
     }
 }
