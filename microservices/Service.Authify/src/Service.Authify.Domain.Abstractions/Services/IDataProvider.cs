@@ -1,9 +1,9 @@
 ﻿namespace Service.Authify.Domain.Services;
 
-public interface IDataProvider<TEntity>
+public interface IDataProvider<TModel>
 {
-    Task<ICollection<TEntity>> Get(
+    Task<ICollection<TModel>> Get(
         CancellationToken cancellationToken = default);
 
-    Task<TEntity?> GetOneById(Guid id, CancellationToken cancellationToken = default);
+    Task<TModel?> GetOneById(Guid id, CancellationToken cancellationToken = default);
 }

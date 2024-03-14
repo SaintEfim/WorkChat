@@ -78,7 +78,7 @@ public class UserCredentialController : ControllerBase
         var userUpdate = _mapper.Map<UserCredentialUpdateDto>(user);
         patchDocument.ApplyTo(userUpdate, ModelState);
         _mapper.Map(userUpdate, user);
-        user.UpdatedAt = DateTime.UtcNow;
+        user!.UpdatedAt = DateTime.UtcNow;
         await _manager.Update(user, cancellationToken);
         return Ok();
     }
