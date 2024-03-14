@@ -8,7 +8,7 @@ public class UserCredentialRepository<TDbContext> : IUserCredentialRepository
 {
     private readonly TDbContext _context;
 
-    public UserCredentialRepository(TDbContext context)
+    protected UserCredentialRepository(TDbContext context)
     {
         _context = context;
     }
@@ -30,7 +30,7 @@ public class UserCredentialRepository<TDbContext> : IUserCredentialRepository
     {
         ArgumentNullException.ThrowIfNull(id);
 
-        return await _context.Set<UserCredential>().FindAsync(new object[] { id }, cancellationToken);
+        return await _context.Set<UserCredential>().FindAsync([id], cancellationToken);
     }
 
     public async Task Update(UserCredential entity, CancellationToken cancellationToken = default)
