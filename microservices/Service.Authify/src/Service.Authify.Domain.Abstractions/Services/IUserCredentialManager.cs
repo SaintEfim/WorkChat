@@ -4,7 +4,7 @@ using Service.Authify.Domain.Models.Responses;
 
 namespace Service.Authify.Domain.Services;
 
-public interface IUserCredentialManager
+public interface IUserCredentialManager : IDataManager<UserCredential>
 {
     Task Register(
         RegistrationRequest registrationRequest,
@@ -17,6 +17,4 @@ public interface IUserCredentialManager
     Task<LoginResponse> Refresh(
         string refreshToken,
         CancellationToken cancellationToken = default);
-
-    Task UpdateUser(UserCredential user, CancellationToken cancellationToken = default);
 }

@@ -10,10 +10,8 @@ using Service.Authify.Domain.Models.Responses;
 
 namespace Service.Authify.Domain.Services;
 
-public class UserCredentialManager : IUserCredentialManager
+public class UserCredentialManager : DataManagerBase<IUserCredentialRepository, UserCredential>, IUserCredentialManager
 {
-    private readonly IUserCredentialRepository _repository;
-    private readonly IMapper _mapper;
     private readonly IJwtHelper _jwtHelper;
     private readonly IHashHelper _hashHelper;
     private readonly string _tokenType;
@@ -22,11 +20,9 @@ public class UserCredentialManager : IUserCredentialManager
     private readonly string _accessSecretKey;
     private readonly string _refreshSecretKey;
 
-    public UserCredentialManager(IUserCredentialRepository repository, IMapper mapper, IConfiguration config,
-        IJwtHelper jwtHelper, IHashHelper hashHelper)
+    public UserCredentialManager(IMapper mapper, IUserCredentialRepository repository, IConfiguration config,
+        IJwtHelper jwtHelper, IHashHelper hashHelper) : base(mapper, repository)
     {
-        _repository = repository;
-        _mapper = mapper;
         _jwtHelper = jwtHelper;
         _hashHelper = hashHelper;
         _tokenType = config.GetValue<string>("TokenType")!;
@@ -46,7 +42,7 @@ public class UserCredentialManager : IUserCredentialManager
                 $"A user with the same {registrationRequest.Email} address already exists.");
         }
 
-        var user = _mapper.Map<UserCredential>(registrationRequest);
+        var user = Mapper.Map<UserCredential>(registrationRequest);
 
         if (user == null)
         {
@@ -57,7 +53,7 @@ public class UserCredentialManager : IUserCredentialManager
         user.Password = _hashHelper.Hash(user.Password);
         user.CreatedAt = DateTime.UtcNow;
 
-        await _repository.Create(user, cancellationToken);
+        await Repository.Create(user, cancellationToken);
     }
 
     public async Task<LoginResponse> Login(LoginRequest loginRequest, CancellationToken cancellationToken = default)
@@ -115,13 +111,6 @@ public class UserCredentialManager : IUserCredentialManager
         };
     }
 
-    public async Task UpdateUser(UserCredential user, CancellationToken cancellationToken = default)
-    {
-        ArgumentNullException.ThrowIfNull(user);
-
-        await _repository.Update(user, cancellationToken);
-    }
-
     private async Task<(string UserId, string UserRole)> DecodeRefreshToken(string refreshToken,
         CancellationToken cancellationToken = default)
     {
@@ -143,7 +132,7 @@ public class UserCredentialManager : IUserCredentialManager
     {
         ArgumentNullException.ThrowIfNull(email);
 
-        var userExists = await _repository.Get(cancellationToken);
+        var userExists = await Repository.Get(cancellationToken);
         var result = userExists.SingleOrDefault(u => _hashHelper.Verify(email, u.Email));
 
         return result != null;
@@ -154,7 +143,7 @@ public class UserCredentialManager : IUserCredentialManager
     {
         ArgumentNullException.ThrowIfNull(loginRequest);
 
-        var userExists = await _repository.Get(cancellationToken);
+        var userExists = await Repository.Get(cancellationToken);
         var user = userExists.SingleOrDefault(u => _hashHelper.Verify(loginRequest.Email, u.Email));
 
         if (user == null)

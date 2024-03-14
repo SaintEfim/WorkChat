@@ -74,12 +74,12 @@ public class UserCredentialController : ControllerBase
         [FromBody] JsonPatchDocument<UserCredentialUpdateDto> patchDocument,
         CancellationToken cancellationToken = default)
     {
-        var user = await _provider.GetUserById(id, cancellationToken);
+        var user = await _provider.GetOneById(id, cancellationToken);
         var userUpdate = _mapper.Map<UserCredentialUpdateDto>(user);
         patchDocument.ApplyTo(userUpdate, ModelState);
         _mapper.Map(userUpdate, user);
         user.UpdatedAt = DateTime.UtcNow;
-        await _manager.UpdateUser(user, cancellationToken);
+        await _manager.Update(user, cancellationToken);
         return Ok();
     }
 }
