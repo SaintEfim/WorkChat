@@ -15,6 +15,7 @@ public class UserCredentialManager : IUserCredentialManager
     private readonly IUserCredentialRepository _repository;
     private readonly IMapper _mapper;
     private readonly IJwtHelper _jwtHelper;
+    private readonly IHashHelper _hashHelper;
     private readonly string _tokenType;
     private readonly string _accessHours;
     private readonly string _refreshHours;
@@ -22,11 +23,12 @@ public class UserCredentialManager : IUserCredentialManager
     private readonly string _refreshSecretKey;
 
     public UserCredentialManager(IUserCredentialRepository repository, IMapper mapper, IConfiguration config,
-        IJwtHelper jwtHelper)
+        IJwtHelper jwtHelper, IHashHelper hashHelper)
     {
         _repository = repository;
         _mapper = mapper;
         _jwtHelper = jwtHelper;
+        _hashHelper = hashHelper;
         _tokenType = config.GetValue<string>("TokenType")!;
         _accessHours = config.GetValue<string>("HoursSettings:AccessHours")!;
         _refreshHours = config.GetValue<string>("HoursSettings:RefreshHours")!;
@@ -51,7 +53,10 @@ public class UserCredentialManager : IUserCredentialManager
             throw new MappingFailedException("Failed to map RegistrationRequest to UserCredential.");
         }
 
+        user.Email = _hashHelper.Hash(user.Email);
+        user.Password = _hashHelper.Hash(user.Password);
         user.CreatedAt = DateTime.UtcNow;
+
         await _repository.Create(user, cancellationToken);
     }
 
@@ -64,6 +69,12 @@ public class UserCredentialManager : IUserCredentialManager
         if (user == null)
         {
             throw new NotFoundUserException($"User with email {loginRequest.Email} not found.");
+        }
+
+        if (!_hashHelper.Verify(loginRequest.Email, user.Email) &&
+            !_hashHelper.Verify(loginRequest.Password, user.Password))
+        {
+            throw new AuthenticationFailedException("Invalid email or password.");
         }
 
         var accessToken = await
@@ -133,7 +144,7 @@ public class UserCredentialManager : IUserCredentialManager
         ArgumentNullException.ThrowIfNull(email);
 
         var userExists = await _repository.Get(cancellationToken);
-        var result = userExists.SingleOrDefault(u => u.Email == email);
+        var result = userExists.SingleOrDefault(u => _hashHelper.Verify(email, u.Email));
 
         return result != null;
     }
@@ -144,7 +155,7 @@ public class UserCredentialManager : IUserCredentialManager
         ArgumentNullException.ThrowIfNull(loginRequest);
 
         var userExists = await _repository.Get(cancellationToken);
-        var user = userExists.SingleOrDefault(u => u.Email == loginRequest.Email);
+        var user = userExists.SingleOrDefault(u => _hashHelper.Verify(loginRequest.Email, u.Email));
 
         if (user == null)
         {
