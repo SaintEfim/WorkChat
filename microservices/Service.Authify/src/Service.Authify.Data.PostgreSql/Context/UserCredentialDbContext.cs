@@ -7,7 +7,7 @@ public sealed class UserCredentialDbContext : DbContext
 {
     public UserCredentialDbContext(DbContextOptions<UserCredentialDbContext> options) : base(options)
     {
-        Database.Migrate();
+        // Database.Migrate();
     }
 
     public DbSet<UserCredential> UsersCredentials { get; set; } = null!;
