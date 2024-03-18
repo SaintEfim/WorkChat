@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Service.Authify.Domain.Models.Requests;
+﻿namespace Service.Authify.Domain.Models.Requests;
 
 public class ResetPassword
 {
