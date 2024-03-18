@@ -17,4 +17,6 @@ public interface IUserCredentialManager : IDataManager<UserCredential>
     Task<LoginResponse> Refresh(
         string refreshToken,
         CancellationToken cancellationToken = default);
+
+    Task ResetPassword(ResetPassword resetPassword, CancellationToken cancellationToken = default);
 }

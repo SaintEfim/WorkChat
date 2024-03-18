@@ -1,4 +1,6 @@
-﻿namespace Service.Authify.Domain.Helpers;
+﻿using Service.Authify.Domain.Exceptions;
+
+namespace Service.Authify.Domain.Helpers;
 
 public class HashHelper : IHashHelper
 {
@@ -14,11 +16,20 @@ public class HashHelper : IHashHelper
 
     public bool Verify(string data, string hashedData)
     {
-        if (string.IsNullOrEmpty(data))
+        ArgumentException.ThrowIfNullOrEmpty(data);
+        ArgumentException.ThrowIfNullOrEmpty(hashedData);
+
+        bool res;
+
+        try
         {
-            throw new InvalidOperationException("Parameter must not be null or empty.");
+            res = BCrypt.Net.BCrypt.EnhancedVerify(data, hashedData);
+        }
+        catch (Exception ex)
+        {
+            throw new HashVerificationException("Error verifying hashed data.", ex);
         }
 
-        return BCrypt.Net.BCrypt.EnhancedVerify(data, hashedData);
+        return res;
     }
 }

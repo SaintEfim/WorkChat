@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Service.Authify.API.Models;
-using Microsoft.AspNetCore.JsonPatch;
 using Service.Authify.API.Models.RequestsDto;
 using Service.Authify.API.Models.ResponsesDto;
 using Service.Authify.Domain.Models.Requests;
@@ -66,20 +65,14 @@ public class UserCredentialController : ControllerBase
         return Ok(_mapper.Map<LoginResponseDto>(res));
     }
 
-    [HttpPatch("resetPassword{id:guid}")]
+    [HttpPatch("resetPassword")]
     [SwaggerOperation(OperationId = nameof(UserCredentialResetPassword))]
     [SwaggerResponse(Status200OK)]
     [SwaggerResponse(Status404NotFound)]
-    public async Task<IActionResult> UserCredentialResetPassword(Guid id,
-        [FromBody] JsonPatchDocument<UserCredentialUpdateDto> patchDocument,
+    public async Task<IActionResult> UserCredentialResetPassword(ResetPasswordDto resetPassword,
         CancellationToken cancellationToken = default)
     {
-        var user = await _provider.GetOneById(id, cancellationToken);
-        var userUpdate = _mapper.Map<UserCredentialUpdateDto>(user);
-        patchDocument.ApplyTo(userUpdate, ModelState);
-        _mapper.Map(userUpdate, user);
-        user!.UpdatedAt = DateTime.UtcNow;
-        await _manager.Update(user, cancellationToken);
+        await _manager.ResetPassword(_mapper.Map<ResetPassword>(resetPassword), cancellationToken);
         return Ok();
     }
 }

@@ -18,5 +18,6 @@ public sealed class AutoMapperProfile : Profile
         CreateMap<LoginRequestDto, LoginRequest>();
         CreateMap<LoginResponse, LoginResponseDto>();
         CreateMap<UserCredentialUpdateDto, UserCredential>().ReverseMap();
+        CreateMap<ResetPasswordDto, ResetPassword>();
     }
 }
