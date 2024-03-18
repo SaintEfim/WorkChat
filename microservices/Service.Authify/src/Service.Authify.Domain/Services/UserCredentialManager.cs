@@ -64,17 +64,16 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
     {
         ArgumentNullException.ThrowIfNull(loginRequest);
 
-        var user = await GetUserByEmailAndPassword(loginRequest, cancellationToken);
+        var user = await GetUserByEmail(loginRequest.Email, cancellationToken);
 
         if (user == null)
         {
             throw new NotFoundUserException($"User with email {loginRequest.Email} not found.");
         }
 
-        if (!_hashHelper.Verify(loginRequest.Email, user.Email) &&
-            !_hashHelper.Verify(loginRequest.Password, user.Password))
+        if (!_hashHelper.Verify(loginRequest.Password, user.Password))
         {
-            throw new AuthenticationFailedException("Invalid email or password.");
+            throw new AuthenticationFailedException("Invalid password.");
         }
 
         var accessToken = await
@@ -115,6 +114,28 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
         };
     }
 
+    public async Task ResetPassword(ResetPassword resetPassword, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(resetPassword);
+
+        var oldUser = await GetUserByEmail(resetPassword.Email, cancellationToken);
+
+        if (oldUser == null)
+        {
+            throw new NotFoundUserException($"User with email {resetPassword.Email} not found.");
+        }
+
+        if (!_hashHelper.Verify(resetPassword.Password, oldUser.Password))
+        {
+            throw new PasswordMismatchException("Passwords do not match.");
+        }
+
+        oldUser.Password = _hashHelper.Hash(resetPassword.NewPassword);
+        oldUser.UpdatedAt = DateTime.UtcNow;
+
+        await Repository.Update(oldUser, cancellationToken);
+    }
+
     private async Task<(string UserId, string UserRole)> DecodeRefreshToken(string refreshToken,
         CancellationToken cancellationToken = default)
     {
@@ -142,18 +163,13 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
         return result != null;
     }
 
-    private async Task<UserCredential?> GetUserByEmailAndPassword(LoginRequest loginRequest,
+    private async Task<UserCredential?> GetUserByEmail(string email,
         CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(loginRequest);
+        ArgumentException.ThrowIfNullOrEmpty(email);
 
         var userExists = await Repository.Get(cancellationToken);
-        var user = userExists.SingleOrDefault(u => _hashHelper.Verify(loginRequest.Email, u.Email));
-
-        if (user == null)
-        {
-            throw new NotFoundUserException($"User with email {loginRequest.Email} not found.");
-        }
+        var user = userExists.SingleOrDefault(u => _hashHelper.Verify(email, u.Email));
 
         return user;
     }
