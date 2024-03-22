@@ -48,11 +48,6 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
 
         var user = Mapper.Map<UserCredential>(registrationRequest);
 
-        if (user == null)
-        {
-            throw new MappingFailedException("Failed to map RegistrationRequest to UserCredential.");
-        }
-
         user.Email = _hashHelper.Hash(user.Email);
         user.Password = _hashHelper.Hash(user.Password);
         user.CreatedAt = DateTime.UtcNow;
@@ -94,7 +89,7 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
 
     public async Task<LoginResponse> Refresh(string refreshToken, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(refreshToken);
+        ArgumentException.ThrowIfNullOrEmpty(refreshToken);
 
         var (userId, userRole) = await DecodeRefreshToken(refreshToken, cancellationToken);
 
@@ -139,7 +134,7 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
     private async Task<(string UserId, string UserRole)> DecodeRefreshToken(string refreshToken,
         CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(refreshToken);
+        ArgumentException.ThrowIfNullOrEmpty(refreshToken);
 
         var user = await _jwtHelper.DecodeToken(refreshToken, _refreshSecretKey, cancellationToken);
         var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -155,7 +150,7 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
 
     private async Task<bool> IsUniqueUser(string email, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(email);
+        ArgumentException.ThrowIfNullOrEmpty(email);
 
         var userExists = await Repository.Get(cancellationToken);
         var result = userExists.SingleOrDefault(u => _hashHelper.Verify(email, u.Email));
