@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapperFromAllAssemblies();
+builder.Services.AddExceptionMappingFromAllAssemblies();
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddDependencyInjection();
 builder.Host.UseSerilog((context, configuration) =>

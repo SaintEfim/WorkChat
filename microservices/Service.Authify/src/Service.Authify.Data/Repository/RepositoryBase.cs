@@ -15,7 +15,7 @@ public abstract class RepositoryBase<TRepository, TDbContext, TEntity> : IReposi
 
     private TDbContext Context { get; }
 
-    protected ILogger<TRepository> Logger { get; }
+    private ILogger<TRepository> Logger { get; }
 
     public virtual async Task<ICollection<TEntity>> Get(CancellationToken cancellationToken = default)
     {

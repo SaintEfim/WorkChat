@@ -16,8 +16,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="bugfix arcitecture">
+    <list default="true" id="48a9b78a-022b-492a-95c4-1a809d40dc23" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Service.Authify.API/Helpers/ExceptionMappingExtensions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Service.Authify/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/Infrastructure/GlobalExceptionHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/Infrastructure/GlobalExceptionHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/Models/ErrorDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/Models/ErrorDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Data/Repository/RepositoryBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Data/Repository/RepositoryBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Exceptions/AuthenticationFailedException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Exceptions/AuthenticationFailedException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Exceptions/ClaimsGenerationException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Exceptions/DataNotFoundException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Exceptions/DuplicateUserException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Exceptions/DuplicateUserException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Exceptions/HashVerificationException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Exceptions/InvalidTokenException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Exceptions/KeyGenerationException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Exceptions/NotFoundUserException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Exceptions/NotFoundUserException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Exceptions/PasswordMismatchException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Exceptions/PasswordMismatchException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Services/IDataManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain.Abstractions/Services/IDataManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain/Helpers/HashHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain/Helpers/HashHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain/Helpers/JwtHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain/Helpers/JwtHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/DataManagerBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/DataManagerBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/DataProviderBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/DataProviderBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/UserCredentialManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service.Authify.Domain/Services/UserCredentialManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,23 +48,30 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/../.." value="main" />
+        <entry key="$PROJECT_DIR$/../.." value="feature/error_handling_in_base_classes" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.API/AutoMapperProfile.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.API/Models/ErrorDto.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.API/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Data.PostgreSql/Repository/UserCredentialRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Domain/Services/UserCredentialManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Domain.Abstractions/Models/Requests/ResetPasswordDto.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Domain/Services/DataManagerBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/NovGu/WorkChat/microservices/Service.Authify/src/Service.Authify.Domain/Services/DataManagerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/3f1acb59718cadf111a0a796681e3d3509bb3381/src/Mvc/Mvc.ApiExplorer/src/DependencyInjection/EndpointMethodInfoApiExplorerServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/da7e9894ce22ef8cc02e5acc56e95a6f8cf8f644/src/Features/JsonPatch/src/JsonPatchDocumentOfT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/da7e9894ce22ef8cc02e5acc56e95a6f8cf8f644/src/Mvc/Mvc.NewtonsoftJson/src/JsonPatchExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/efcore/423b1a0d38036efcefdbf1dfb80955449eae1238/src/EFCore/DbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/efcore/423b1a0d38036efcefdbf1dfb80955449eae1238/src/EFCore/DbUpdateException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/649f9a5315084d038b64e29ea11b1fb56d20/ae/0b540bc9/IConfiguration.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1fce37416598a5fb677f9b329d52e2e9d64e126621a5229f5a5884d87827b9ad/Mapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/306cf56a0b3332e9ee2dfe07e2494f93be0f95b33a8f2716dac5e42dac528bb/ProblemDetails.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/394cf11a64687141fd58fb926ff8b3d5a299eba3bbadaf2de9b93928d523d4/Type.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/64f62229ea25ec82851b50d463b5c1606d17866d927c27afb2f7b1e39f348/SecurityTokenDescriptor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9e6ecf3790a24c43487ae724bf9ea8185bdedaf6c28da376d6ea862e66453/WebApplicationBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a614a754ab15364aa8ac82b190515fa48f911fb8282094b3f4f4144d126882/MapperConfigurationExpression.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d882146b4f265f10bcbec2663fce248db9ffec5fa1aeaf76e32a11ba5eafcd6/MethodBaseInvoker.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -66,13 +94,13 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "deletionFromPopupRequiresConfirmation": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "feature/add__globalExceptionHandler",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "CodeLensConfigurable",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -127,6 +155,8 @@
     <recent_temporary>
       <list>
         <item itemvalue=".NET Launch Settings Profile.Service.Authify.API" />
+        <item itemvalue=".NET Launch Settings Profile.Service.Authify.API" />
+        <item itemvalue=".NET Launch Settings Profile.Service.Authify.API" />
       </list>
     </recent_temporary>
   </component>
@@ -147,6 +177,7 @@
       <workItem from="1709293448554" duration="22732000" />
       <workItem from="1709619271850" duration="5037000" />
       <workItem from="1709822086459" duration="8718000" />
+      <workItem from="1710398722427" duration="66938000" />
     </task>
     <task id="LOCAL-00001" summary="Moved key generation to a separate class">
       <option name="closed" value="true" />
@@ -276,7 +307,111 @@
       <option name="project" value="LOCAL" />
       <updated>1710059575192</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="created a repository template">
+      <option name="closed" value="true" />
+      <created>1710244703850</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1710244703850</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Completed work">
+      <option name="closed" value="true" />
+      <created>1710402435498</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1710402435498</updated>
+    </task>
+    <task id="LOCAL-00019" summary="finished">
+      <option name="closed" value="true" />
+      <created>1710417504883</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1710417504883</updated>
+    </task>
+    <task id="LOCAL-00020" summary="finished">
+      <option name="closed" value="true" />
+      <created>1710419877398</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1710419877398</updated>
+    </task>
+    <task id="LOCAL-00021" summary="added logger">
+      <option name="closed" value="true" />
+      <created>1710428403998</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1710428403998</updated>
+    </task>
+    <task id="LOCAL-00022" summary="reformat code">
+      <option name="closed" value="true" />
+      <created>1710429396227</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1710429396227</updated>
+    </task>
+    <task id="LOCAL-00023" summary="added logger">
+      <option name="closed" value="true" />
+      <created>1710487086876</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1710487086876</updated>
+    </task>
+    <task id="LOCAL-00024" summary="edited logger">
+      <option name="closed" value="true" />
+      <created>1710487688884</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1710487688884</updated>
+    </task>
+    <task id="LOCAL-00025" summary="bugfix">
+      <option name="closed" value="true" />
+      <created>1710661805367</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1710661805367</updated>
+    </task>
+    <task id="LOCAL-00026" summary="edited method reset password">
+      <option name="closed" value="true" />
+      <created>1710747981264</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1710747981265</updated>
+    </task>
+    <task id="LOCAL-00027" summary="removed unusing library">
+      <option name="closed" value="true" />
+      <created>1710748284984</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1710748284984</updated>
+    </task>
+    <task id="LOCAL-00028" summary="added GlobalExceptionHandler">
+      <option name="closed" value="true" />
+      <created>1711098709971</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1711098709971</updated>
+    </task>
+    <task id="LOCAL-00029" summary="warnings fix">
+      <option name="closed" value="true" />
+      <created>1711098792974</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1711098792974</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,16 +423,75 @@
     <MESSAGE value="Moved key generation to a separate class" />
     <MESSAGE value="INSERT changed SELECT" />
     <MESSAGE value="Added exception check to Registration" />
-    <MESSAGE value="bugfix" />
     <MESSAGE value="remove async" />
     <MESSAGE value="remove unusing" />
     <MESSAGE value="remove fields" />
     <MESSAGE value="added endpoint login" />
     <MESSAGE value="removed unusing" />
-    <MESSAGE value="reformat code" />
     <MESSAGE value="Rendered the decode method" />
     <MESSAGE value="added new endpoint" />
     <MESSAGE value="bugfix arcitecture" />
-    <option name="LAST_COMMIT_MESSAGE" value="bugfix arcitecture" />
+    <MESSAGE value="created a repository template" />
+    <MESSAGE value="Completed work" />
+    <MESSAGE value="finished" />
+    <MESSAGE value="reformat code" />
+    <MESSAGE value="added logger" />
+    <MESSAGE value="edited logger" />
+    <MESSAGE value="bugfix" />
+    <MESSAGE value="edited method reset password" />
+    <MESSAGE value="removed unusing library" />
+    <MESSAGE value="added GlobalExceptionHandler" />
+    <MESSAGE value="warnings fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="warnings fix" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/Service.Authify.API/Infrastructure/GlobalExceptionHandler.cs</url>
+          <line>26</line>
+          <properties documentPath="C:\NovGu\WorkChat\microservices\Service.Authify\src\Service.Authify.API\Infrastructure\GlobalExceptionHandler.cs" initialLine="25" containingFunctionPresentation="Method 'TryHandleAsync'">
+            <startOffsets>
+              <option value="889" />
+            </startOffsets>
+            <endOffsets>
+              <option value="936" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/Service.Authify.API/Infrastructure/GlobalExceptionHandler.cs</url>
+          <line>59</line>
+          <properties documentPath="C:\NovGu\WorkChat\microservices\Service.Authify\src\Service.Authify.API\Infrastructure\GlobalExceptionHandler.cs" initialLine="57" containingFunctionPresentation="Method 'GetTitleAndStatusCode'">
+            <startOffsets>
+              <option value="1903" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1925" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/Service.Authify.API/Infrastructure/GlobalExceptionHandler.cs</url>
+          <line>57</line>
+          <properties documentPath="C:\NovGu\WorkChat\microservices\Service.Authify\src\Service.Authify.API\Infrastructure\GlobalExceptionHandler.cs" initialLine="55" containingFunctionPresentation="Method 'GetTitleAndStatusCode'">
+            <startOffsets>
+              <option value="1808" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1880" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Type#System.Reflection.FieldAttributes" memberName="value__" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

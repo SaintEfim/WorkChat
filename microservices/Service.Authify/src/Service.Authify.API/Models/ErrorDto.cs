@@ -14,5 +14,5 @@ public class ErrorDto
     public int Status { get; set; }
 
     [JsonPropertyName("errors")]
-    public Dictionary<string, string[]> Errors { get; set; } = null!;
+    public Dictionary<string, string[]> Errors { get; set; } = new();
 }

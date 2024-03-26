@@ -21,9 +21,9 @@ public abstract class DataProviderBase<TProvider, TRepository, TDomain> : IDataP
 
     protected IMapper Mapper { get; }
 
-    protected TRepository Repository { get; }
+    private TRepository Repository { get; }
 
-    protected ILogger<TProvider> Logger { get; }
+    private ILogger<TProvider> Logger { get; }
 
     public virtual async Task<ICollection<TDomain>> Get(CancellationToken cancellationToken = default)
     {

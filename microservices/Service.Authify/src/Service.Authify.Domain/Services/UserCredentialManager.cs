@@ -16,6 +16,7 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
 {
     private readonly IJwtHelper _jwtHelper;
     private readonly IHashHelper _hashHelper;
+    private readonly ILogger<UserCredentialManager> _logger;
     private readonly string _tokenType;
     private readonly string _accessHours;
     private readonly string _refreshHours;
@@ -27,6 +28,7 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
         IConfiguration config,
         IJwtHelper jwtHelper, IHashHelper hashHelper) : base(mapper, logger, repository)
     {
+        _logger = logger;
         _jwtHelper = jwtHelper;
         _hashHelper = hashHelper;
         _tokenType = config.GetValue<string>("TokenType")!;
@@ -140,12 +142,10 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
         var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var userRole = user.FindFirst(ClaimTypes.Role)?.Value;
 
-        if (userId == null || userRole == null)
-        {
-            throw new InvalidTokenException("Invalid token. Missing required claims.");
-        }
+        if (userId != null && userRole != null) return (userId, userRole);
+        _logger.LogError("Invalid token. Missing required claims.");
+        throw new Exception("An error occurred while processing your request.");
 
-        return (userId, userRole);
     }
 
     private async Task<bool> IsUniqueUser(string email, CancellationToken cancellationToken = default)

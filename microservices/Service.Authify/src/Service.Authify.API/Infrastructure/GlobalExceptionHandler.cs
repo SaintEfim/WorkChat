@@ -2,7 +2,6 @@
 using System.Text.Json;
 using Microsoft.AspNetCore.Diagnostics;
 using Service.Authify.API.Models;
-using Service.Authify.Domain.Exceptions;
 
 namespace Service.Authify.API.Infrastructure;
 
@@ -10,25 +9,16 @@ public class GlobalExceptionHandler : IExceptionHandler
 {
     private readonly ILogger<GlobalExceptionHandler> _logger;
 
-    private readonly Dictionary<Type, (string title, int statusCode)> _exceptionMapping =
-        new()
-        {
-            { typeof(AuthenticationFailedException), ("Authentication Failed", (int)HttpStatusCode.Unauthorized) },
-            { typeof(ClaimsGenerationException), ("Claims Generation Error", (int)HttpStatusCode.InternalServerError) },
-            { typeof(DataNotFoundException), ("Data Not Found", (int)HttpStatusCode.NotFound) },
-            { typeof(DuplicateUserException), ("Duplicate User", (int)HttpStatusCode.Conflict) },
-            { typeof(HashVerificationException), ("Hash Verification Error", (int)HttpStatusCode.InternalServerError) },
-            { typeof(InvalidTokenException), ("Invalid Token", (int)HttpStatusCode.BadRequest) },
-            { typeof(KeyGenerationException), ("Key Generation Error", (int)HttpStatusCode.InternalServerError) },
-            { typeof(NotFoundUserException), ("User Not Found", (int)HttpStatusCode.NotFound) },
-            { typeof(PasswordMismatchException), ("Password Mismatch", (int)HttpStatusCode.BadRequest) },
-        };
+    private readonly Dictionary<Type, (string title, int statusCode)> _exceptionMapping;
 
-    private const string ErrorType = "https://datatracker.ietf.org/doc/html/rfc9110#section-15.5.1";
+    private readonly string _errorType;
 
-    public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger)
+    public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger,
+        Dictionary<Type, (string title, int statusCode)> exceptionMapping, IConfiguration config)
     {
         _logger = logger;
+        _exceptionMapping = exceptionMapping;
+        _errorType = config.GetValue<string>("ErrorURLType")!;
     }
 
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception,
@@ -53,7 +43,7 @@ public class GlobalExceptionHandler : IExceptionHandler
 
         return new ErrorDto
         {
-            Type = ErrorType,
+            Type = _errorType,
             Title = title,
             Status = statusCode,
             Errors = errors

@@ -23,7 +23,7 @@ public abstract class DataManagerBase<TManager, TRepository, TDomain> : IDataMan
 
     protected TRepository Repository { get; }
 
-    protected ILogger<TManager> Logger { get; }
+    private ILogger<TManager> Logger { get; }
 
     public virtual async Task Create(TDomain entity, CancellationToken cancellationToken = default)
     {

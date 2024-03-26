@@ -1,6 +1,6 @@
 ﻿namespace Service.Authify.Domain.Services;
 
-public interface IDataManager<TModel>
+public interface IDataManager<in TModel>
 {
     Task Create(TModel entity, CancellationToken cancellationToken = default);
 
