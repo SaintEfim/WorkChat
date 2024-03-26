@@ -13,12 +13,15 @@ public class GlobalExceptionHandler : IExceptionHandler
 
     private readonly string _errorType;
 
+    private readonly string _defaultTitle;
+
     public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger,
         Dictionary<Type, (string title, int statusCode)> exceptionMapping, IConfiguration config)
     {
         _logger = logger;
         _exceptionMapping = exceptionMapping;
-        _errorType = config.GetValue<string>("ErrorURLType")!;
+        _defaultTitle = config.GetValue<string>("ErrorSettings:DefaultTitle")!;
+        _errorType = config.GetValue<string>("ErrorSettings:ErrorURLType")!;
     }
 
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception,
@@ -62,7 +65,7 @@ public class GlobalExceptionHandler : IExceptionHandler
         }
         else
         {
-            title = "One or more validation errors occurred.";
+            title = _defaultTitle;
             statusCode = (int)HttpStatusCode.InternalServerError;
         }
 
