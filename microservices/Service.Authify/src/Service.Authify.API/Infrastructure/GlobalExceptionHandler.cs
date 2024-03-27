@@ -34,6 +34,7 @@ public class GlobalExceptionHandler : IExceptionHandler
         var details = BuildErrorDto(title, statusCode, exception);
         var response = JsonSerializer.Serialize(details);
         httpContext.Response.ContentType = "application/json";
+        httpContext.Response.StatusCode = details.Status;
 
         await httpContext.Response.WriteAsync(response, cancellationToken);
 

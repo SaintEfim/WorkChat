@@ -2,13 +2,13 @@
 
 namespace Service.Authify.Domain.Exceptions;
 
-public class NotFoundUserException : Exception
+public class NotFoundException : Exception
 {
-    public NotFoundUserException()
+    public NotFoundException()
     {
     }
 
-    public NotFoundUserException(string message) : base(message)
+    public NotFoundException(string message) : base(message)
     {
     }
 

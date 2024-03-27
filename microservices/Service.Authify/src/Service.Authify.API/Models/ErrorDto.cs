@@ -10,8 +10,8 @@ public class ErrorDto
     [JsonPropertyName("title")]
     public string Title { get; set; } = string.Empty;
 
-    [JsonPropertyName("status")]
-    public int Status { get; set; }
+    [JsonPropertyName("status")] 
+    public int Status { get; set; } = 500;
 
     [JsonPropertyName("errors")]
     public Dictionary<string, string[]> Errors { get; set; } = new();

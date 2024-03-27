@@ -65,7 +65,7 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
 
         if (user == null)
         {
-            throw new NotFoundUserException($"User with email {loginRequest.Email} not found.");
+            throw new NotFoundException($"User with email {loginRequest.Email} not found.");
         }
 
         if (!_hashHelper.Verify(loginRequest.Password, user.Password))
@@ -119,7 +119,7 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
 
         if (oldUser == null)
         {
-            throw new NotFoundUserException($"User with email {resetPassword.Email} not found.");
+            throw new NotFoundException($"User with email {resetPassword.Email} not found.");
         }
 
         if (!_hashHelper.Verify(resetPassword.Password, oldUser.Password))
