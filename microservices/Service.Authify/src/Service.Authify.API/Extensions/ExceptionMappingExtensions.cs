@@ -5,8 +5,6 @@ namespace Service.Authify.API.Extensions;
 
 public static class ExceptionMappingExtensions
 {
-    private static readonly Dictionary<Type, (string? title, int statusCode)> ExceptionMapping = new();
-    
     public static void AddExceptionMappingFromAllAssemblies(this IServiceCollection services)
     {
         var assemblies = Assembly.GetExecutingAssembly().GetReferencedAssemblies()
@@ -20,12 +18,6 @@ public static class ExceptionMappingExtensions
                 type is { IsAbstract: false, IsInterface: false, IsClass: true }
             );
 
-        MapExceptionsHelper.MapExceptions(exceptionTypes);
-
-        services.AddSingleton(provider =>
-        {
-            var mapping = ExceptionMapping;
-            return mapping;
-        });
+        services.AddSingleton(MapExceptionsHelper.MapExceptions(exceptionTypes));
     }
 }

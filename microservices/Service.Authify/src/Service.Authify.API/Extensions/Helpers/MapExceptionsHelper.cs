@@ -6,7 +6,7 @@ public static class MapExceptionsHelper
 {
     private static readonly Dictionary<Type, (string? title, int statusCode)> ExceptionMapping = new();
     
-    public static void MapExceptions(IEnumerable<Type> exceptionTypes)
+    public static Dictionary<Type, (string? title, int statusCode)> MapExceptions(IEnumerable<Type> exceptionTypes)
     {
         foreach (var exceptionType in exceptionTypes)
         {
@@ -22,5 +22,7 @@ public static class MapExceptionsHelper
 
             ExceptionMapping.Add(exceptionType, (title, statusCode));
         }
+
+        return ExceptionMapping;
     }
 }
