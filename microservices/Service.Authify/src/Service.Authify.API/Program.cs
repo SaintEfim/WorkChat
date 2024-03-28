@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Service.Authify.API;
-using Service.Authify.API.Helpers;
+using Service.Authify.API.Extensions;
 using Service.Authify.Data.PostgreSql.Context;
 using Serilog;
-using Service.Authify.API.Infrastructure;
+using Service.Authify.API.Infrastructure.ExceptionHandling;
 
 var builder = WebApplication.CreateBuilder(args);
 

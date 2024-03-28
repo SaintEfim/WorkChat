@@ -1,4 +1,5 @@
-﻿using Service.Authify.Domain.Helpers;
+﻿using Service.Authify.API.Infrastructure.ExceptionHandling.Helpers;
+using Service.Authify.Domain.Helpers;
 using Service.Authify.Data.PostgreSql.Repository;
 using Service.Authify.Data.Repository;
 using Service.Authify.Domain.Services;
@@ -11,6 +12,8 @@ public static class DependencyInjectionContainer
     {
         services.AddScoped<IJwtHelper, JwtHelper>();
         services.AddScoped<IHashHelper, HashHelper>();
+        services.AddSingleton<BuildErrorDtoHelper>();
+        services.AddSingleton<GetTitleAndStatusCodeHelper>();
         services.AddScoped<IUserCredentialRepository, UserCredentialRepository>();
         services.AddScoped<IUserCredentialManager, UserCredentialManager>();
         services.AddScoped<IUserCredentialProvider, UserCredentialProvider>();

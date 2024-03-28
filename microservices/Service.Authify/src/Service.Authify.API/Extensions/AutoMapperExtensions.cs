@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using AutoMapper;
 
-namespace Service.Authify.API.Helpers;
+namespace Service.Authify.API.Extensions;
 
 public static class AutoMapperExtensions
 {

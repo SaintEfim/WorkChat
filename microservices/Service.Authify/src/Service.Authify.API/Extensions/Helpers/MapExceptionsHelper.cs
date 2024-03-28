@@ -1,30 +1,12 @@
 ﻿using System.Reflection;
 
-namespace Service.Authify.API.Helpers;
+namespace Service.Authify.API.Extensions.Helpers;
 
-public static class ExceptionMappingExtensions
+public static class MapExceptionsHelper
 {
     private static readonly Dictionary<Type, (string? title, int statusCode)> ExceptionMapping = new();
-
-    public static void AddExceptionMappingFromAllAssemblies(this IServiceCollection services)
-    {
-        var assemblies = Assembly.GetExecutingAssembly().GetReferencedAssemblies()
-            .Select(Assembly.Load)
-            .Union(new[] { Assembly.GetExecutingAssembly() });
-
-        var exceptionTypes = assemblies
-            .SelectMany(assembly => assembly.GetTypes())
-            .Where(type =>
-                typeof(Exception).IsAssignableFrom(type) &&
-                type is { IsAbstract: false, IsInterface: false, IsClass: true }
-            );
-
-        MapExceptions(exceptionTypes);
-
-        services.AddSingleton(ExceptionMapping);
-    }
-
-    private static void MapExceptions(IEnumerable<Type> exceptionTypes)
+    
+    public static void MapExceptions(IEnumerable<Type> exceptionTypes)
     {
         foreach (var exceptionType in exceptionTypes)
         {
