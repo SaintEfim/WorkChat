@@ -33,7 +33,7 @@ public abstract class DataProviderBase<TProvider, TRepository, TDomain> : IDataP
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Error while receiving data: {ex.Message}");
+            Logger.LogError(ex, "Error while receiving data: {Message}", ex.Message);
             throw;
         }
     }
@@ -46,7 +46,7 @@ public abstract class DataProviderBase<TProvider, TRepository, TDomain> : IDataP
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Error when retrieving data by ID: {ex.Message}");
+            Logger.LogError(ex, "Error when retrieving data by ID: {Message}", ex.Message);
             throw;
         }
     }
