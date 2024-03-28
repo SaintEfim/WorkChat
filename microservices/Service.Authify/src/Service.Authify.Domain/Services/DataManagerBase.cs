@@ -23,7 +23,7 @@ public abstract class DataManagerBase<TManager, TRepository, TDomain> : IDataMan
 
     protected TRepository Repository { get; }
 
-    protected ILogger<TManager> Logger { get; }
+    private ILogger<TManager> Logger { get; }
 
     public virtual async Task Create(TDomain entity, CancellationToken cancellationToken = default)
     {
@@ -33,7 +33,7 @@ public abstract class DataManagerBase<TManager, TRepository, TDomain> : IDataMan
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Error creating entity: {ex.Message}");
+            Logger.LogError(ex, "Error creating entity: {Message}", ex.Message);
             throw;
         }
     }
@@ -46,7 +46,7 @@ public abstract class DataManagerBase<TManager, TRepository, TDomain> : IDataMan
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Error updating entity: {ex.Message}");
+            Logger.LogError(ex, "Error updating entity: {Message}", ex.Message);
             throw;
         }
     }
@@ -61,7 +61,7 @@ public abstract class DataManagerBase<TManager, TRepository, TDomain> : IDataMan
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Error when deleting an entity: {ex.Message}");
+            Logger.LogError(ex, "Error when deleting an entity: {Message}", ex.Message);
             throw;
         }
     }

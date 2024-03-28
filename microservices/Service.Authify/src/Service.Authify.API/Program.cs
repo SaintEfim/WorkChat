@@ -1,14 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using Service.Authify.API;
-using Service.Authify.API.Helpers;
+using Service.Authify.API.Extensions;
 using Service.Authify.Data.PostgreSql.Context;
 using Serilog;
+using Service.Authify.API.Infrastructure.ExceptionHandling;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapperFromAllAssemblies();
+builder.Services.AddExceptionMappingFromAllAssemblies();
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddDependencyInjection();
 builder.Host.UseSerilog((context, configuration) =>
@@ -21,6 +23,9 @@ builder.Services.AddDbContext<UserCredentialDbContext>(options =>
     options.EnableSensitiveDataLogging();
 });
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -32,5 +37,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseSerilogRequestLogging();
 app.UseRouting();
+app.UseExceptionHandler();
 app.MapControllers();
 app.Run();

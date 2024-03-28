@@ -38,6 +38,7 @@ public class UserCredentialController : ControllerBase
     [HttpPost("register")]
     [SwaggerOperation(OperationId = nameof(UserCredentialRegister))]
     [SwaggerResponse(Status200OK)]
+    [SwaggerResponse(Status409Conflict, Type = typeof(ErrorDto))]
     public async Task<IActionResult> UserCredentialRegister(RegistrationRequestDto registrationRequest,
         CancellationToken cancellationToken = default)
     {
@@ -48,6 +49,8 @@ public class UserCredentialController : ControllerBase
     [HttpPost("login")]
     [SwaggerOperation(OperationId = nameof(UserCredentialLogin))]
     [SwaggerResponse(Status200OK)]
+    [SwaggerResponse(Status401Unauthorized, Type = typeof(ErrorDto))]
+    [SwaggerResponse(Status404NotFound, Type = typeof(ErrorDto))]
     public async Task<ActionResult<LoginResponseDto>> UserCredentialLogin(LoginRequestDto loginRequest,
         CancellationToken cancellationToken = default)
     {
@@ -68,7 +71,8 @@ public class UserCredentialController : ControllerBase
     [HttpPatch("resetPassword")]
     [SwaggerOperation(OperationId = nameof(UserCredentialResetPassword))]
     [SwaggerResponse(Status200OK)]
-    [SwaggerResponse(Status404NotFound)]
+    [SwaggerResponse(Status400BadRequest, Type = typeof(ErrorDto))]
+    [SwaggerResponse(Status404NotFound, Type = typeof(ErrorDto))]
     public async Task<IActionResult> UserCredentialResetPassword(ResetPasswordDto resetPassword,
         CancellationToken cancellationToken = default)
     {

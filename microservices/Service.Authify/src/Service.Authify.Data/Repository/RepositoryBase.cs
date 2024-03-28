@@ -15,7 +15,7 @@ public abstract class RepositoryBase<TRepository, TDbContext, TEntity> : IReposi
 
     private TDbContext Context { get; }
 
-    protected ILogger<TRepository> Logger { get; }
+    private ILogger<TRepository> Logger { get; }
 
     public virtual async Task<ICollection<TEntity>> Get(CancellationToken cancellationToken = default)
     {
@@ -25,7 +25,7 @@ public abstract class RepositoryBase<TRepository, TDbContext, TEntity> : IReposi
         }
         catch (DbUpdateException ex)
         {
-            Logger.LogError(ex, $"Error getting entity: {ex.Message}");
+            Logger.LogError(ex, "Error creating entity: {Message}", ex.Message);
             throw;
         }
     }
@@ -41,7 +41,7 @@ public abstract class RepositoryBase<TRepository, TDbContext, TEntity> : IReposi
         }
         catch (DbUpdateException ex)
         {
-            Logger.LogError(ex, $"Error creating entity: {ex.Message}");
+            Logger.LogError(ex, "Error creating entity: {Message}", ex.Message);
             throw;
         }
     }
@@ -56,7 +56,7 @@ public abstract class RepositoryBase<TRepository, TDbContext, TEntity> : IReposi
         }
         catch (DbUpdateException ex)
         {
-            Logger.LogError(ex, $"Error getting entity:: {ex.Message}");
+            Logger.LogError(ex, "Error getting entity: {Message}", ex.Message);
             throw;
         }
     }
@@ -72,7 +72,7 @@ public abstract class RepositoryBase<TRepository, TDbContext, TEntity> : IReposi
         }
         catch (DbUpdateException ex)
         {
-            Logger.LogError(ex, $"Error updating entity: {ex.Message}");
+            Logger.LogError(ex, "Error updating entity: {Message}", ex.Message);
             throw;
         }
     }
@@ -97,7 +97,7 @@ public abstract class RepositoryBase<TRepository, TDbContext, TEntity> : IReposi
         }
         catch (DbUpdateException ex)
         {
-            Logger.LogError(ex, $"Error deleting entity: {ex.Message}");
+            Logger.LogError(ex, "Error deleting entity: {Message}", ex.Message);
             throw;
         }
     }

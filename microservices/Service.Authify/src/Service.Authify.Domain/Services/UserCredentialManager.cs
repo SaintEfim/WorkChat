@@ -16,6 +16,7 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
 {
     private readonly IJwtHelper _jwtHelper;
     private readonly IHashHelper _hashHelper;
+    private readonly ILogger<UserCredentialManager> _logger;
     private readonly string _tokenType;
     private readonly string _accessHours;
     private readonly string _refreshHours;
@@ -27,6 +28,7 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
         IConfiguration config,
         IJwtHelper jwtHelper, IHashHelper hashHelper) : base(mapper, logger, repository)
     {
+        _logger = logger;
         _jwtHelper = jwtHelper;
         _hashHelper = hashHelper;
         _tokenType = config.GetValue<string>("TokenType")!;
@@ -48,11 +50,6 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
 
         var user = Mapper.Map<UserCredential>(registrationRequest);
 
-        if (user == null)
-        {
-            throw new MappingFailedException("Failed to map RegistrationRequest to UserCredential.");
-        }
-
         user.Email = _hashHelper.Hash(user.Email);
         user.Password = _hashHelper.Hash(user.Password);
         user.CreatedAt = DateTime.UtcNow;
@@ -68,7 +65,7 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
 
         if (user == null)
         {
-            throw new NotFoundUserException($"User with email {loginRequest.Email} not found.");
+            throw new NotFoundException($"User with email {loginRequest.Email} not found.");
         }
 
         if (!_hashHelper.Verify(loginRequest.Password, user.Password))
@@ -94,7 +91,7 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
 
     public async Task<LoginResponse> Refresh(string refreshToken, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(refreshToken);
+        ArgumentException.ThrowIfNullOrEmpty(refreshToken);
 
         var (userId, userRole) = await DecodeRefreshToken(refreshToken, cancellationToken);
 
@@ -122,7 +119,7 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
 
         if (oldUser == null)
         {
-            throw new NotFoundUserException($"User with email {resetPassword.Email} not found.");
+            throw new NotFoundException($"User with email {resetPassword.Email} not found.");
         }
 
         if (!_hashHelper.Verify(resetPassword.Password, oldUser.Password))
@@ -139,23 +136,21 @@ public class UserCredentialManager : DataManagerBase<UserCredentialManager, IUse
     private async Task<(string UserId, string UserRole)> DecodeRefreshToken(string refreshToken,
         CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(refreshToken);
+        ArgumentException.ThrowIfNullOrEmpty(refreshToken);
 
         var user = await _jwtHelper.DecodeToken(refreshToken, _refreshSecretKey, cancellationToken);
         var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var userRole = user.FindFirst(ClaimTypes.Role)?.Value;
 
-        if (userId == null || userRole == null)
-        {
-            throw new InvalidTokenException("Invalid token. Missing required claims.");
-        }
+        if (userId != null && userRole != null) return (userId, userRole);
+        _logger.LogError("Invalid token. Missing required claims.");
+        throw new Exception("An error occurred while processing your request.");
 
-        return (userId, userRole);
     }
 
     private async Task<bool> IsUniqueUser(string email, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(email);
+        ArgumentException.ThrowIfNullOrEmpty(email);
 
         var userExists = await Repository.Get(cancellationToken);
         var result = userExists.SingleOrDefault(u => _hashHelper.Verify(email, u.Email));
